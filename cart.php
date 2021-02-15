@@ -1,75 +1,121 @@
+
+<div style="height: 6.1rem; margin-bottom: 10px;">
+           
+        
+ </div>
+
 <?
+include("sessions.php");
 include("globalconfig.php");
 include("sql.php");
-include("sessions.php");
 
-$u_id= $_SESSION["u_id"];
+$u_id = $_SESSION["u_id"];
+$u_u = $_SESSION["u_u"];
+
+if (!empty($_SESSION["u_id"]))
+ {
+
 
 ?>
 
-
-
-
-
-   <!--================Categories Banner Area =================-->
-
-        <!--================End Categories Banner Area =================-->
-        
-        <!--================Shopping Cart Area =================-->
-        <section class="shopping_cart_area p_100">
-            <div class="container">
+   <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-8">
                         <div class="cart_items">
-                            <h3>Your Cart Items</h3>
+                            <h3></h3>
                             <div class="table-responsive-md">
                                 <table class="table">
                                     <tbody>
+                                      <div class="row">
+                                      <div class="col-12 col-lg-12 p-0">
+                                         <div class="container mt-3 mb-4">
+
+
+ <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-12 px-0 pr-lg-2 mb-2 mb-lg-0">
+          <div class="card border-light bg-white card proviewcard shadow-sm">
+ <div class="card-header">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-lg-8">
+            <span><i class="fa fa-shopping-cart"></i> Shopping cart</span>
+            </div>
+ 
+            
+             </div>
+             </div>
+          </div>
+            <div class="card-body">
+
+              <div class="col-lg-12 p-3 cardlist">
+
 <?
 
-                      $sql="SELECT * FROM cart where u_id = '$u_id'"; 
-              $result = $conn->query($sql);
-              if ($result->num_rows > 0) {
-               while($row = $result->fetch_assoc()) 
-                  {
-                            $product_id = $row["product_id"];
-                                    $productName = $row["product_name"];
-                                    $productDescription = $row["product_desc"];
-                                    $product_price = $row["product_price"];
-                                    $c_id = $row['c_id'];
-                                    
+ $sql="SELECT * FROM cart where u_id = '$u_id'";
 
-                       product($productName,$product_price,$productDescription,$product_id,$c_id);
+  if (isset($_GET["search"])) 
+ {
+       $find = "%".$_GET["search"]."%";  
+        $sql.="AND product_name LIKE '$find'  ";   
+ }
+ 
+$sql.="group by product_id ORDER by date desc ";
+$result = $conn->query($sql);
+$total=mysqli_num_rows($result);
+$page = $_GET["page"];
 
-         
+if (isset($limit)){
+  }else{$limit = 10;}
+$pages = $total / $limit;
+$page_in = $page * $limit;
+$sql.="LIMIT $page_in ,$limit ";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while($row = $result->fetch_assoc()) 
+{
+  
+  $product_id = $row["product_id"];
+                  $productName = $row["product_name"];
+                  $productDescription = $row["product_description"];
+                  $product_price = $row["product_price"];
+                  $w_id = $row['c_id'];
+                   $u_u = getMerchant($product_id);
+                   $merchant_id = $row['merchant_id'];
+                  $imageURL = getProductImage($product_id);
 
 
-               }
+                  wistlist($productName,$product_price,$productDescription,$product_id,$w_id,$u_u,$merchant_id,$imageURL);
 
+}
+}
+
+              
 
 ?>
 
+                      
 
 
-<?
+              </div>
+</div>
+            <div class="card-footer border-light cart-panel-foo-fix">
+              <a   class="btn btn-add-con">Continue Shopping</a>
+            </div>
+          </div>
+        </div>
+          
+      </div>
+    </div>
+  
+  </div>
 
-              }
-            else
-             {
-
-                ?>
+</div>
 
 
-        
-       
-            <!--================End login Area =================-->
-                <?
-               
-            }
-
-                 ?>
-
-                                    
+</div>
+          
+    
                                     
                                     </tbody>
                                 </table>
@@ -77,214 +123,191 @@ $u_id= $_SESSION["u_id"];
                         </div>
                     </div>
                    
-                </div>
+
+ <div class="col-lg-4">
+                        <div class="cart_items">
+                            <h3></h3>
+                            <div class="table-responsive-md">
+                                <table class="table">
+                                    <tbody>
+                                      <div class="row">
+                                      <div class="col-12 col-lg-12 p-0">
+                                         <div class="container mt-3 mb-4">
+
+
+ <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-12 px-0 pr-lg-2 mb-2 mb-lg-0">
+          <div class="card border-light bg-white card proviewcard shadow-sm">
+ <div class="card-header">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-lg-8">
+            <span> Cart Total</span>
             </div>
-
-
-        </section>
-
-
-        <!--================End Shopping Cart Area =================-->
-        <?
-
-
-            function product($productName,$product_price,$productDescription,$product_id,$c_id)
-            {
-
-                    include("sql.php");
-                            $sql="SELECT * FROM product_images where product_id = '$product_id'"; 
-                            $result = $conn->query($sql);
-                            if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) 
-                            {
-                            $image = $row["file_name"];
-                           
-                    ?>
-
- <div class="grid">
-  <div class="card card__one">
-    
-    <div class="card__desc">
-   
-                                  
-
-                                        <div class="row">
-                                           <div class="col-lg-1 form-group">
-                                              <img  src="img/icon/close-icon.png"  onclick="deleted('<?echo $c_id;?>')" alt="">
-                                             </div>
-                                            
-                                            <div class="col-lg-3 form-group">
-                                              <div class="col">
-                                                 <img  style="height: 150px; width: 150px" class="img-fluid" src="photos/<?echo $image;?>" alt="">
-                                               </div>
-                                            </div>
-                                            
-                                            <div class="col-lg-6 form-group">
-                                               <div class="media-body">
-                                                   <h6><?echo $productName; ?></h6>
-                                                 
-                                                  <p class="red"><?echo "₱".$product_price;?></p>
-                                                </div>
-                                            </div>
-                                                        
-   
-
-                                                
-                                          <div class="col-lg-2 form-group">
-                                           <a class="add_cart_btn" href="#" onClick="postIt('add_to_cart.php?product_id=<?echo $product_id;?>'),hidePT()">add to cart</a>
-                                        </div>
-                                    </div>
-                                    
-                              
-                               
-                           
-                             
+ 
+            
+             </div>
+             </div>
+          </div>
+            <div class="card-body">
+      
+            </div>
+            <div class="card-footer border-light cart-panel-foo-fix">
+              <a  class="btn btn-add-con">PROCEED TO CHECHOUT</a>
+            </div>
+          </div>
+        </div>
+          
+      </div>
     </div>
+  
   </div>
 
 </div>
-                        
-                                        <?
 
-                                    }}
-                                }
 
-                    ?><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-       <style>
+</div>
           
-              .checked {
-                color: orange;
-              }
-               @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+    
+                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
-fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
+                </div>
+
+            </div>
 
 
-
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 340px;
-  margin: 0 auto;
-  margin-top: 10px;
-}
-@media screen and (min-width: 768px) {
-  .grid {
-    max-width: 1200px;
-  }
-}
-
-.card {
-  position: relative;
-  flex: 1 1 100%;
-  margin: 31px 0;
-  padding: 20px;
-  background: white;
-}
-@media screen and (min-width: 768px) {
-  .card {
-    flex-basis: calc(33.33% - (62px + 40px));
-    margin: 0 31px;
-  }
-}
-
-.card__thumb {
-  overflow: hidden;
-}
-
-.card__img {
-  margin: -20px -20px 0;
-}
-.card__img img {
-  max-width: 100%;
-  height: auto;
-  border: 0;
-  vertical-align: middle;
-  box-sizing: border-box;
-}
-
-.card__desc {
-  margin-top: 5px;
+<? 
 }
 
 
 
-.card__one {
-  transition: transform .5s;
-}
-.card__one::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transition: opacity 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  content: '';
-  opacity: 0;
-  z-index: -1;
-}
-.card__one:hover, .card__one:focus {
-  transform: scale3d(1.006, 1.006, 1);
-}
-.card__one:hover::after, .card__one:focus::after {
-  opacity: 1;
-}
+          
 
 
 
-/****** Style Star Rating Widget *****/
-.selectpicker
+       
+
+function  wistlist($productName,$product_price,$productDescription,$product_id,$w_id,$u_u,$merchant_id,$imageURL)
 {
-    border: white;
-    text-decoration-style: none;
+  ?>
+ <div class="col-lg-12 p-3 cardlist">
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <div class="row">
+                        <div class="col-4 col-lg-3 col-xl-2">
+                          <div class="row">
+                            <a  class="w-100">
+                              <img style="width: 100px; "  src="<?echo $imageURL;?>" class="mx-auto d-block mb-1 addcartimg">
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-8 col-lg-9 col-xl-10">
+                          <div class="d-block text-truncate mb-1 deo_product_name wish">
+                            <a  class="product-name "><?echo $productName;?></a>
+                          </div>
+                          <div class="seller d-block">
+                            <span>Seller: </span>
+                            <span><?echo $u_u;?></span>
+                          </div>
+                          <div class="cartviewprice d-block">
+                            <span class="deo_price deo_color_price"><?echo "₱                ".$product_price;?>.00</span>
+                            <span class="disamt"></span>
+                          </div>
+                          <div class="cartviewprice d-block deo_product_name">
+                            <span class="oldamt "><?echo $productDescription; ?></span>
+                            <span class="disamt"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-4 col-lg-3 col-xl-2 p-0 qty">
+                          <div class="input-group">
+                         
+                           
+                          </div>
+                        </div>
+
+                         <div class="col-lg-4 col-sm-12"><a  class="addcardrmv"> <button onclick="confirmation('window','remove_to_cart.php?cart_id=<?echo $w_id;?>','card.php')" type="button" class="button full-width button-sliding-icon ripple-effect">
+                            <span class="fa fa-cross"></span>Remove
+                        </button></a></div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 ml-lg-auto align-self-start mt-2 mt-lg-0">
+                      <div class="row-fluid">
+                        <div class="prostatus">
+
+<div class="circle_btn " style="float: right;">
+      <button  onClick="javascript:ajaxpagefetcher.load('window', 'convo.php?product_id=<?echo$product_id;?>&merchant_id=<?echo $merchant_id;?>&seller_id=<?echo $merchant_id;?>&dd=<?echo "no";?>', true)" class="product_heart"><i class="fa fa-envelope"></i></button>
+
+      
+ </div>
+
+                       
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+
+  <?
 }
 
-.heading {
-  font-size: 18px;
-  margin-right: 25px;
+
+?>
+
+
+
+
+
+
+<?
+  function getMerchant($product_id) {
+    include("sql.php");
+    $sql="SELECT * FROM product where product_id = '$product_id'"; 
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) { 
+        if (empty($row['u_u'])) {
+            $u_u = "No name";
+          } else {
+            $u_u = $row["u_u"];
+          }
+      }
+    }
+    return $u_u;
+  }
+?>
+
+
+
+<?
+  function getProductImage($product_id) {
+    include("sql.php");
+    $sql="SELECT * FROM product_images where product_id = '$product_id' group by product_id"; 
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) { 
+        if (empty($row['file_name'])) {
+            $img = "https://all4sale.ph/blank.jpg";
+          } else {
+            $img =  "https://all4sale.ph/photos/".$row['file_name'];
+          }
+      }
+    }
+    return $img;
+  }
+?>
+<style type="text/css">
+	.proviewcard .card-body {
+    padding: 0;
 }
-
-/*****/
-.rating { 
-  border: none;
-  float: left;
-}
-
-.rating > input { display: none; } 
-.rating > label:before { 
-  margin: 5px;
-  font-size: 1.25em;
-  font-family: FontAwesome;
-  display: inline-block;
-  content: "\f005";
-}
-
-.rating > .half:before { 
-  content: "\f089";
-  position: absolute;
-}
-
-.rating > label { 
-  color: #ddd; 
- float: right; 
-}
-
-/***** CSS Magic to Highlight Stars on Hover *****/
-
-.rating > input:checked ~ label, /* show gold star when clicked */
-.rating:not(:checked) > label:hover, /* hover current star */
-.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
-
-.rating > input:checked + label:hover, /* hover current star when changing rating */
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
-              </style>
-          </style>
+</style>
 

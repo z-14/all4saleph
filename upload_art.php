@@ -6,7 +6,7 @@
 
 
 if(!isset($_SESSION["u_u"])){
-exit;
+//exit;
 }
 
 

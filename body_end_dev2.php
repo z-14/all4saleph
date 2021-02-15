@@ -8,8 +8,209 @@
 <script src="menu_custom.js"></script>
  <script type="text/javascript">
 
+function doc_mer()
+{
+   setInterval(function(){
+        $.ajax({
+            type:"POST",
+            url:"merchant_doc.php",
+            success:function(result)
+            {
+                $("#deo_docu").html(result);
+            }
+        });
+    }, 2000);
+}
 
 
+  function get_cat(id,yn)
+    {
+
+      var aa = document.getElementById(id);
+      var id = aa.value;
+    $.ajax({
+            url: "big_box.php",
+            type: "POST",
+            data: { id:id,yn:yn},                   
+            success: function()
+                        {
+                                                                
+                        }
+        });
+
+    }
+
+function deo_head_search(va1,id)
+{
+ var aa = document.getElementById(id);
+      var id = aa.value;
+    $.ajax({
+            url: "shop.php",
+            type: "POST",
+            data: { value:va1,id:id},                   
+            success: function()
+                        {
+                          
+                           ajaxpagefetcher.load('window','shop.php?value='+va1+'&id='+id,true);                                     
+                        }
+        });
+}
+
+
+      function get_small_box(id,yn,box)
+    {
+
+      var aa = document.getElementById(id);
+      var id = aa.value;
+    $.ajax({
+            url: "small_box_reg.php",
+            type: "POST",
+            data: { id:id,box:box,yn:yn},                   
+            success: function()
+                        {
+                            ajaxpagefetcher.load('window','home_page_setting.php',true);                                   
+                        }
+        });
+
+    }
+
+
+function gogo(id)
+{
+
+     $.ajax({
+            url: "cat_image.php",
+            type: "POST",
+            data: { id:id},                   
+            success: function()
+                        {
+                                                               
+                        }
+        });
+}
+
+ function get_filter_big_box(class_name)
+    {
+            var filter = [];
+
+            $.each($("input[name="+class_name+"]:checked"), function(){            
+
+                  filter.push($(this).val());
+
+            });
+
+        return filter;
+    }
+function message()
+{
+    setInterval(function(){
+        $.ajax({
+            type:"POST",
+            url:"product_image.php",
+            success:function(result)
+            {
+                $("#p_im").html(result);
+            }
+        });
+    }, 2000);
+}
+
+
+
+
+
+
+
+function cat_image(id)
+{
+
+    setInterval(function(){
+        $.ajax({
+            type:"POST",
+            url:"shot_cat_image.php",
+            data: { id:id},  
+            success:function(result)
+            {
+                $("#"+id).html(result);
+            }
+        });
+    }, 2000);
+}
+
+    function filter_data()
+    {
+       $('.filter_data').html('<div id="loading" style="" ></div>');
+        var action = 'fetch_data';
+        var sub = get_filter('shop_chech');
+        var sort = get_filter('price_id');
+        var search = get_search('search_id');
+        var sortBy = get_location('sortBy');
+        $.ajax({
+            url:"filter_data.php",
+            method:"POST",
+            data:{action:action,sub:sub,sort:sort,search:search,sortBy:sortBy},
+            success:function(data)
+            {
+                $('.filter_data').html(data);
+            }
+        });
+    }
+
+   function get_filter(class_name)
+    {
+            var filter = [];
+
+            $.each($("input[name="+class_name+"]:checked"), function(){            
+
+                  filter.push($(this).val());
+
+            });
+
+        return filter;
+    }
+
+
+     function get_search(v1)
+    {
+
+var s1 = document.getElementById(v1);      
+var v1 = s1.value;
+    return v1;
+    }
+
+
+     function get_location(v1)
+    {
+
+var s1 = document.getElementById(v1);      
+var v1 = s1.value;
+    return v1;
+    }
+
+
+ 
+
+
+
+
+
+
+
+
+
+    function dd()
+    {
+
+        filter_data();
+  
+    }
+
+
+
+
+
+
+ 
 
 
 
@@ -141,18 +342,82 @@ swalWithBootstrapButtons.fire({
 
   });
 
+  function deo_loadMore(post_id)
+  {
+        var row = Number($('#row').val());
+        var allcount = Number($('#all').val());
+        var rowperpage = 3;
+        var action = 'fetch_data';
+        row = row + rowperpage;
+
+        if(row <= allcount){
+            $("#row").val(row);
+            $.ajax({
+                url: 'show_more_data.php',
+                type: 'post',
+                data: {row:row,post_id:post_id,action:action},
+                beforeSend:function(){
+                    $(".load-more").text("Loading...");
+                },
+                success: function(response){
+
+                    // Setting little delay while displaying new content
+                    setTimeout(function() {
+                        // appending posts after last post with class="post"
+                        $(".post:last").after(response).show().fadeIn("slow");
+
+                        var rowno = row + rowperpage;
+
+                        // checking row value is greater than allcount or not
+                        if(rowno > allcount){
+
+                            // Change the text and background
+                            $('.load-more').text("Hide");
+                            $('.load-more').css("background","darkorchid");
+                        }else{
+                            $(".load-more").text("Load more");
+                        }
+                    }, 2000);
+
+                }
+            });
+        }else{
+            $('.load-more').text("Loading...");
+
+            // Setting little delay while removing contents
+            setTimeout(function() {
+
+                // When row is greater than allcount then remove all class='post' element after 3 element
+                $('.post:nth-child(3)').nextAll('.post').remove();
+
+                // Reset the value of row
+                $("#row").val(0);
+
+                // Change the text and background
+                $('.load-more').text("Load more");
+                $('.load-more').css("background","#15a9ce");
+                
+            }, 2000);
+
+
+        }
+
+    }
+
+
   $(document).on('click','.show_more_shop',function()
   {
         var ID = $(this).attr('id');
+        var action = 'fetch_data';
         $('.show_more_shop').hide();
         $('.loding').show();
           $.ajax({
             type:'POST',
-            url:'show_more.php',
-            data:'id='+ID,
+            url:'show_more_data.php',
+            data:{id:ID,action:action},
             success:function(html){
                 $('#show_more_main'+ID).remove();
-                $('.c_product_grid_details').append(html);
+                $('.post').append(html);
             }
         });
 
@@ -332,6 +597,15 @@ swalWithBootstrapButtons.fire({
   }, false);
   }
 
+
+
+
+function close_modal()
+{
+  $('#exampleModal').modal('hide');
+}
+
+
     function hide_deo(id){
     var x = document.getElementById(id);
 //x.style.display = "none";
@@ -445,6 +719,11 @@ function populate(s1,s2)
       document.getElementById("computer_hdd").style.display='none';
     
 
+}
+
+function editProfile()
+{
+        document.getElementById("edit").style.display='block';
 }
 
 function checkvalue(s2)

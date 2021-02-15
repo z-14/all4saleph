@@ -10,7 +10,7 @@ $product_id = $_SESSION["product_id"];
 $dd = $_GET["full"];
 $cat_name =$_GET["cat_name"];
 $sub_name=$_GET["sub_name"];
-
+$deo_sel = $_SESSION["deo_seller"];
 
 
 
@@ -35,8 +35,6 @@ else
 	$full="yes";
 }
 
-if ($other=="no")
- {
 
 $sql="SELECT * FROM user_profile WHERE u_id ='$u_id' LIMIT 0, 1"; 
 $result = $conn->query($sql);
@@ -46,21 +44,23 @@ while($row = $result->fetch_assoc())
 	 $merchant_type=$row["merchant_type"];
 }
 }
-}
-else
+
+if(!empty($deo_sel))
 {
-$merchant_type=$other;
+	$merchant_type=$deo_sel;
 }
+
 
 $datavalues = array();
 foreach ($_POST as $name => $value) {
-  				  array_push( $datavalues, "`".$name."`='".$value."'");
+	$data_in=addslashes($value);
+  				  array_push( $datavalues, "`".$name."`='".$data_in."'");
 }
 
  $datavaluesfin = implode(",",$datavalues);
 
  $p_date = mktime(date("H"),date("i"),date("s"), date("n") , date("j"), date("Y"));
-$sql1 = "UPDATE `product` SET ".$datavaluesfin.",`u_u` = '$u_u',`seller_type` ='$merchant_type' ,`full_details`= '$full',`product_cat`='$cat_name',`product_subcat`='$sub_name' WHERE `product_id` = '$product_id'";
+$sql1 ="UPDATE `product` SET ".$datavaluesfin.",`u_u` = '$u_u',`seller_type`='$merchant_type',`full_details`= '$full',`product_cat`='$cat_name',`product_subcat`='$sub_name' WHERE `product_id` = '$product_id'";
 if ($conn->query($sql1) == TRUE) {
     echo "Product has been post";
 } else {

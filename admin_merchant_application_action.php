@@ -94,7 +94,7 @@ include("sql.php");
 $sql2="UPDATE user_profile SET merchant='$merchant2' WHERE `u_id` = '$u_id'";
 if ($conn->query($sql2) === TRUE) {
 	include("notif.php");
-  notif($ad,$u_id,$send_email_msg,'login_mobile.php');
+  notif($ad,$u_id,$send_email_msg,'logout.php');
     echo "successfully updated";
 } else {
     echo $sql2."Error updating record: " . $conn->error;

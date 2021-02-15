@@ -5,7 +5,6 @@ include ("globalconfig.php");
 
 function notif($n_from,$n_to, $n_details, $n_page){
 include("sql.php");
-include("onesignal_send.php");
 
 
 $date = mktime(date("H"),date("i"),date("s"), date("n") , date("j"), date("Y"));

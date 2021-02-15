@@ -7,8 +7,7 @@ include("sql.php");
 $u_id=$_SESSION['u_id'];
 $product_id = $_SESSION["product_id"];
 $_SESSION["product_id"]=$product_id;
-function img($product_id)
-{
+
    include("sql.php");
             $sql="SELECT * FROM product_images WHERE product_id ='$product_id'"; 
               $result = $conn->query($sql);
@@ -23,13 +22,13 @@ function img($product_id)
                
                               ?>
                             
-          <div style="padding-left: 5px; padding-right: 5px;"  class="single-blog-post style-3 col-lg-3 col-sm-3 deo_img">
+          <div style="padding-left: 5px; padding-right: 5px;"  class="single-blog-post style-3 col-lg-6 col-sm-3 deo_img">
                                 <!-- Post Thumb -->
                                 <div class="H-p">
              <div style="padding: 5px;" class="deo_card">
           <img  style="height: 15px; width: 15px; margin-bottom: 10px;"src="img/icon/close-icon.png"  alt="">
-                           
-                               <img class="img-fluid" src="<?php echo 'photos/'.$row['file_name'];?>" alt="" height='300'/>
+                        
+                     <img class="img-fluid" src="<?php echo 'photos/'.$row['file_name'];?>" alt="" height='300'/>
                                  </div>
                                   </div>
                               </div>
@@ -45,7 +44,7 @@ function img($product_id)
                              </div>
                           <?
                               }
-}
+
                             ?>
 
 
@@ -66,7 +65,7 @@ function img($product_id)
 						<label>Upload Photo</label><br/>
 					  <input  style="margin-bottom: 10px;" type="file" id="file" name="upload[]" accept="image/*" onclick="showMe();"  multiple="true" required />
 
-					  <button id="uploadbutton" class="add_cart_btn  btn-block col-md-4 col-12 mt-15" onclick="upload_image_deo('uploadphoto','photo_upload_reg.php','photo_upload.php','uploadImage'), hide_deo(this.id),ShowInfo('')">Upload</button>
+					  <button id="uploadbutton" class="button full-width button-sliding-icon ripple-effect  btn-block col-md-4 col-12 mt-15" onclick="upload_image_deo('uploadphoto','photo_upload_reg.php','photo_upload.php','uploadImage'), hide_deo(this.id),ShowInfo(''),message()">Upload</button>
 
 					</form>
 				</div>

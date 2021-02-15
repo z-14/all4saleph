@@ -1,277 +1,801 @@
 <?
-include ("sessions.php");
+
+include("sql.php");
+include("sessions.php");
 include ("globalconfig.php");
+
+
 
 $u_u = $_SESSION["u_u"];
 $_SESSION["m"]=$_GET["m"];
 
 
-if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) { // if request is not secure, redirect to secure url
+if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) { // if request is not secure, redirect to secure 
     $url = 'https://' . $_SERVER['HTTP_HOST']
     . $_SERVER['REQUEST_URI'];
     header('Location: ' . $url);
     exit;
 } 
 ?>
+
+
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, , shrink-to-fit=no,viewport-fit=cover">
-        
-        <link rel="icon" href="img/fav-icon.png" type="image/x-icon" />
+<html  >
+<head>
+  <!-- Site made with Mobirise Website Builder v4.10.5, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+   <link rel="icon" href="img/fav-icon.png" />
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>All 4 Sale</title>
+    <!-- Owl Stylesheets -->
+    
 
-        <!-- Icon css link -->
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="vendors/line-icon/css/simple-line-icons.css" rel="stylesheet">
-        <link href="vendors/elegant-icon/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
+  <link rel="stylesheet" href="assets/tether/tether.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/socicon/css/styles.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="engine1/style.css" />
+    <script type="text/javascript" src="engine1/jquery.js"></script>
+ 
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/css/uikit.min.css" />
+
+
+  <!----shop-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        
-        <!-- Rev slider css -->
-        <link href="vendors/revolution/css/settings.css" rel="stylesheet">
-        <link href="vendors/revolution/css/layers.css" rel="stylesheet">
-        <link href="vendors/revolution/css/navigation.css" rel="stylesheet">
-        
-        <!-- Extra plugin css -->
-        <link href="vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
-        <link href="vendors/bootstrap-selector/css/bootstrap-select.min.css" rel="stylesheet">
-        
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
+        <!-- Slick -->
+        <link type="text/css" rel="stylesheet" href="css/slick.css"/>
+        <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+        <!-- nouislider -->
+        <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        
-        <script src="js/ajax.js" type="text/javascript"></script>
-        <script src="js/function.js" type="text/javascript"></script>
-<script type="text/javascript" src="datepicker.js"></script>
+        <!-- Font Awesome Icon -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
 
-<link rel="stylesheet" type="text/css" href="datepicker.css"/>
-<link rel="stylesheet" href="./css/pikaday.css">
-<link rel="stylesheet" href="./css/theme.css">
-<link rel="stylesheet" href="./css/triangle.css">
+        <!-- Custom stlylesheet -->
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
+        <!--box_slider-->
+         <link rel="stylesheet" href="jquery.flipbox.css">
 
-<?
-
-include("head_dev1.php");
-include("head_dev2.php");
-include("head.php");
-?>
-           
-        
-    </head>
-    <body>
-        
-            <?
-            
-include("facebook.php");
-    include("body_start_dev1.php");
-    include("body_start_dev2.php");
-    include("body_start.php");
-    ?>
-    
-    <div class="info" id="info">Loading</div>
-    
-    
-    
-    <!--================Top Header Area =================-->
+         <!--carousel---->
+             <script src="assets/vendors/jquery.min.js"></script>
+    <script src="assets/owlcarousel/owl.carousel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+     <!--carousel---->
 
 
+  <link rel="stylesheet" href="deo_head.css" type="text/css">
 
-	<div id="windowPoP"></div>
-    <div class="header_top_area" style="padding-bottom: 0;">
-        <div style="padding-left: 0px; margin-left: 50px; margin-right: 40px;">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="top_right_header">
-                        <div class="row">
-                            <div class="col-lg-3" style="padding-right: 0px;"><img src="img/logo.png" alt="" style="
-                            float: left; margin-top: 30px;
-                            "></div>
-                            <div class="col-lg-1"></div>
-                            <div class="col-lg-8" style="padding-left: 0px; margin-top: 28px;"><div class="list-group">
-                               <div class="list-group">
+        <style type="text/css">
+          .item {display: inline-block; height: 100%; width: 100%; text-align: center; vertical-align: top; font-size: 0;}
+            .box {width: 100%; height: 100%; font-size: initial;}
+            .box .side { font-size: 80px; font-weight: 700; color: #fff; text-align: center; user-select: none;}
+ .info{
+display: none;
+width: 100%;
+height: 100%;
+font-size: 16px;
+text-align: center;
+position: fixed;
+top: 0px;
+bottom: 0px;
+left: 0px;
+z-index:100;
+padding: 15px;
+background: white url(loading2.gif) no-repeat center center; 
+background-size: 40%;
+color: black;
+z-index:99999999999;
+padding: 30px;
+}
+  .color-box 
+{
+  display:inline-block;
+  background-color: #1A2223;
+  color: white;
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 0px;
+  width: 100%;
+  font-size: 20px;
+font-size: 19px;
+left: 0;
+bottom: 0;
+}
+.cube_text
+{
+  padding: 10px;
+}
 
-                                   <div class="input-group input-group-sm mb-3" id="art_search">
-                                      
-                                        <input id="art_search_input" type="text" placeholder="Search here" name="" onchange="javascript:ajaxpagefetcher.load('window', 'search.php?search='+this.value, true)">
-                                        <div id="art_sale"></div>
-                                    </div> 
-                                    
-                      </div></div>
-                  </div>
-              </div>
-          </div>
-      </div>
+.deo_con
+{
+  position: relative;
+  text-align: center;
+  color: black;
+  font-size: 12px;
+}
+.deo_con img
+{
+  height: 250px;
+  width: 100%;
+}
+
+.deo_product_name
+{
+line-height: 22px;
+    white-space: nowrap;
+    word-break: normal;
+overflow-wrap: normal;
+overflow: hidden;
+hyphens: auto;
+text-overflow: ellipsis;
+}
+.bottom-left {
+  position: absolute;
+}
+
+
+.full
+{
+   margin-top: 275px;
+}
+.mobile_view
+{
+  display: none;
+}
+@media only screen and (max-width: 480px)
+ {
+.mobile
+{
+    margin-top: 250px;
+  margin-left: 0px;
+}
+.mobile_1
+{
+    margin-top: 20px;
+  margin-left: 0px;
+}
+.full
+{
+   margin-top: 0;
+}
+
+.deo_margin_top
+{
+  margin-top: 275px;
+}
+
+.deo_title_bold
+{
+  font-size: 50px;
+}
 
 
 
-      <div class="col-lg-4">
-        <div class="top_right_header">
-            <ul class="top_right">
-                <li class="user" onclick="javascript:ajaxpagefetcher.load('window', 'login_mobile.php', true)" style="margin-right: 2px;"><a href="#"><i class="icon-user icons"></i></a></li>
-                <li class="cart" onclick="javascript:ajaxpagefetcher.load('window', 'cart_list.php', true)" style="
-                margin-right: 3px;
-                "><a href="#"><i class="icon-handbag icons"></i></a></li>
+.navbar-toggleable-sm .nav-dropdown .dropdown-submenu {
 
-                <li onclick="javascript:ajaxpagefetcher.load('window', 'product_create.php', true)" class="user" style="
-                /* height: 50px; */
-                "><a style="/* font-size:17px; */height: 50px;"><img src="shopping-bag.png" style="
-                padding-bottom: 7px;
-                "><span style="
-                font-size: 17px;
-                ">SELL ITEM</span>
-
-            </a></li>
-        </ul>
+    left: 0px;
+ 
+}
+}
 
 
-    </div>
-</div>
-</div>
-</div>
-</div>
+#popNotifArt{
+position: fixed;
+top: 80px;
+left: 20px;
+width: 0px;
+height: 0px;
+z-index:999999;
+}
 
+.popNotifsArt{
+width: 300px;
+display: inline-block;
+border: 1px solid white;
+border-radius: 20px;
+box-shadow: 1px 1px 2px 2px #aaaaaa;
+color: gray;
+padding: 10px;
+clear: both;
+font-size: 10px;
+margin-bottom: 2px;
+background: white;
+}
 
-<header class="shop_header_area" id="menu">
-    <?
-    include("menu.php");
-    ?>
+</style>
+
+</head>
+<body>
+   
+
+  <header class="shop_header_area" id="menu">
+
+   <?include ("menu_mobile.php");?>
+
 </header>
 
+   <div style="height: 4rem;" >
+         
+ </div>
+   <div id="info" class="info" style="display: none;"></div>
 
-
-
-
-
-<!--================End Top Header Area =================-->
-  
- <div id="window"> 
-        
- <?
-
-if($_GET["m"]=="" || $_SESSION["m"]==""){
-//include("home_carousel_area.php");
-include("featured_new.php");
-}
-?>
-
-
-
-
-<?
-include("categories_main.php");
-?>
-
-<?
-if($_GET['m']=="mobile"){
-include("featured_new.php");
-}
-?>       
-
- 
-<!--================Our Latest Product Area =================-->
-<?
-include("our_latest_product.php");
-?>
-<!--================End Our Latest Product Area =================-->
-
-
-
-
-
-
-
-
- </div>   
-
-<!--================Feature  =================-->
-<?
-//include("featured_products.php");
-?>  
-
-
-
-
- 
- 
-        
-
+  <div id="windowPoP" style="display: none;"></div>
   <div id="popNotifArt">
   
-  </div>  
-        
-        
-        
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <!-- Rev slider js -->
-        <script src="vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
-        <script src="vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-        <!-- Extra plugin css -->
-        <script src="vendors/counterup/jquery.waypoints.min.js"></script>
-        <script src="vendors/counterup/jquery.counterup.min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="vendors/bootstrap-selector/js/bootstrap-select.min.js"></script>
-        <script src="vendors/image-dropdown/jquery.dd.min.js"></script>
-        <script src="js/smoothscroll.js"></script>
-        <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-        <script src="vendors/isotope/isotope.pkgd.min.js"></script>
-        <script src="vendors/magnify-popup/jquery.magnific-popup.min.js"></script>
-        <script src="vendors/vertical-slider/js/jQuery.verticalCarousel.js"></script>
-        <script src="vendors/jquery-ui/jquery-ui.js"></script>
-        
-        <script src="js/theme.js"></script>
-        
-        <script>
-    var hidden;
+  </div> 
 
-    function uploadIt(name,target, thengoto){
-        var form = document.forms.namedItem(name);
-        form.addEventListener('submit', function(ev) {
+<div id="window">
+ <?
+      include("sql.php");
+       $sql="SELECT * FROM mission where paralax != ''";
+        $result = $conn->query($sql);
 
-          oData = new FormData(form);
+if ($result->num_rows > 0) 
+{
+ 
+while($row = $result->fetch_assoc()) 
+{
+  $image='photos/'.$row['paralax'];
 
-          oData.append("CustomField", "This is some extra data");
+}
 
-          var oReq = new XMLHttpRequest();
-          oReq.open("POST", target, true);
-          oReq.onload = function(oEvent) {
-            if (oReq.status == 200) {      
-              ShowInfo(oReq.responseText);
-              if(oReq.responseText=="success"){
-                  ajaxpagefetcher.load('window', thengoto, true);
-              }
-          } else {
-              ShowInfo("Error " + oReq.status + " occurred when trying to upload your file.");
-              hidden.style.display = "block";
-          }
-      };
+}?>
 
-      oReq.send(oData);
-      ev.preventDefault();
-  }, false);
+
+<section class="mbr-fullscreen cid-rv7Qam26I0 mbr-parallax-background mbr-parallax-background"  style="background-image: url('<?echo $image?>');" id="header2-g">
+ 
+    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(35, 35, 35);"></div>
+
+    <div class="container ">
+
+   
+        <div class="row">
+            <div class="mbr-white col-md-10">
+              <p style="margin-bottom: 0px; " class="mbr-text mbr-fonts-style display-5 deo_title">WHERE
+                </p>
+                <p class="mbr-text mbr-fonts-style display-5 deo_title_bold">
+                    You can Sell
+                </p>
+                <p class="mbr-text mbr-fonts-style display-5  deo_title_bold">
+                    ANYTHING
+                </p>
+                
+            </div>
+        </div>
+    </div>
+    <div class="mbr-arrow hidden-sm-down" aria-hidden="true">
+        <a href="#next">
+            <i class="mbri-down mbr-iconfont"></i>
+        </a>
+    </div>
+</section>
+
+
+<section class="mbr-section article content3 cid-rv7QtQjtSv deo_margin_tb deo_bg_color" id="content3-h">
+    <div class="container">
+        <div class="media-container-row">
+            <div class="row col-12 col-md-12">
+                <div class="col-12 mbr-text mbr-fonts-style col-md-6 display-5">
+                     <strong><p>MISSION</p></strong>
+                </div>
+                <div class="col-12 mbr-text mbr-fonts-style display-7 col-md-12">
+                     <p><?
+                      include("sql.php");
+  $sql2="SELECT * FROM mission  ORDER by m_id desc LIMIT 0, 1"; 
+    $result = $conn->query($sql2);
+        //$result = $conn->query($sql);
+            if ($result->num_rows > 0) 
+                {
+                    while($row = $result->fetch_assoc()) 
+                        {  
+                            echo $row["mission"];
+                        }
+
+                      }
+                     ?></p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="features3 deo_bg_color" id="features3-4">
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-7 p-0">
+  
+<div id="wowslider-container1">
+    <div class="ws_images"><ul>
+      <?
+      include("sql.php");
+       $sql="SELECT * FROM product_categories where big_box = 'yes'";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+
+ 
+while($row = $result->fetch_assoc()) 
+{
+
+  $type = $row['cat_type'];
+ $cat_name = $row['cat_name'];
+$image='photos/'.$row['image'];
+      ?>
+        <li>
+          <img onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')"  src="<?echo $image;?>" alt="Chrysanthemum" title="" /><div onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')"  class="color-black"><span><?echo $row["cat_name"];?></span></div>
+          
+        </li>
+        <?
+      }
+    }?>
+      
+ 
+    </ul></div>
+ 
+
+    <div class="ws_shadow"></div>
+    </div>  
+
+</div>
+
+<div class="col-lg-5" >
+   <div class="container-fluid p-0">
+      <div class="row">
+    <div class="col-lg-6 mobile_1">
+      <div class="item">
+            <div class="box " id="box4">
+
+                    <?
+      include("sql.php");
+       $sql="SELECT * FROM product_categories where small_box1 = 'yes'";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+ 
+while($row = $result->fetch_assoc()) 
+{
+  $image='photos/'.$row['image'];
+  $type = $row['cat_type'];
+ $cat_name = $row['cat_name'];
+?>
+   <div class="side side1 deo_con"><img onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')" src="<?echo $image;?>"><div class="bottom-left color-box "><span class="cube_text" onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')" src="<?echo $image;?>"><?echo $row["cat_name"];?></span></div></div>
+
+
+<?
+}
+
+}?>
+               
+            
+
+
+            </div>
+
+        </div>
+        </div>
+          <div class="col-lg-6 mobile">
+      <div class="item">
+            <div class="box" id="box5">
+                    <?
+      include("sql.php");
+       $sql="SELECT * FROM product_categories where small_box2 = 'yes'";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+ 
+while($row = $result->fetch_assoc()) 
+{
+  $image='photos/'.$row['image'];
+  $type = $row['cat_type'];
+ $cat_name = $row['cat_name'];
+?>
+   <div class="side side1 deo_con"><img onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')" src="<?echo $image;?>"><div class="bottom-left color-box "><span class="cube_text" onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')" src="<?echo $image;?>"><?echo $row["cat_name"];?></span></div></div>
+
+
+<?
+}
+
+}?>
+            
+            </div>
+
+            
+        </div>
+        
+        </div>  
+<div class="full"></div>
+         <div class="col-lg-6 mobile">
+      <div class="item">
+            <div class="box" id="box6">
+            <?
+      include("sql.php");
+       $sql="SELECT * FROM product_categories where small_box3 = 'yes'";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+ 
+while($row = $result->fetch_assoc()) 
+{
+  $image='photos/'.$row['image'];
+  $type = $row['cat_type'];
+ $cat_name = $row['cat_name'];
+?>
+   <div class="side side1 deo_con"><img onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')" src="<?echo $image;?>"><div class="bottom-left color-box "><span class="cube_text" onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')" src="<?echo $image;?>"><?echo $row["cat_name"];?></span></div></div>
+
+
+<?
+}
+
+}?>
+            </div>  
+        </div>
+        </div>  
+
+
+         <div class="col-lg-6 mobile">
+      <div class="item">
+            <div class="box" id="box7">
+                 <?
+      include("sql.php");
+       $sql="SELECT * FROM product_categories where small_box4 = 'yes'";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+ 
+while($row = $result->fetch_assoc()) 
+{
+   $image='photos/'.$row['image'];
+  $type = $row['cat_type'];
+ $cat_name = $row['cat_name'];
+?>
+   <div class="side side1 deo_con"><img onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')" src="<?echo $image;?>"><div class="bottom-left color-box "><span class="cube_text" onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')" src="<?echo $image;?>"><?echo $row["cat_name"];?></span></div></div>
+
+
+<?
+}
+
+}?>
+            
+            </div>
+
+            
+        </div>
+        
+        </div>  
+         
+</div>
+</div>
+
+
+
+
+</div>
+ 
+</div>
+
+</div>
+
+</section>
+<section class="deo_margin_top">
+      
+  </section>
+
+<section class="mbr-section article content10 cid-rv7MSn33bu" id="content10-f">
+    
+    <div class="container">
+        <div class="inner-container" style="width: 66%;">
+            <hr class="line" style="width: 25%;">
+            <div class="deo_margin_tb_nocolor section-text align-center mbr-white mbr-fonts-style display-5">
+               <?
+      include("sql.php");
+       $sql="SELECT * FROM mission where big_blog !='' ";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+ 
+while($row = $result->fetch_assoc()) 
+{
+ echo "\"".$row['big_blog']."\"";
+}
+
+}?>
+                </div>
+            <hr class="line" style="width: 25%;">
+        </div>
+    </div>
+</section>
+
+
+<section class="mbr-section content7 cid-rv7Mxjud2B" id="content7-e">
+    <div class="container">
+        <div class="media-container-row">
+            <div class="col-lg-6 col-md-8 ">
+                <div class="media-container-row">
+                    <div class="media-content">
+                        <div class="mbr-section-text">
+                            <p class="mbr-text align-center mb-0 mbr-fonts-style display-7">
+                   <?
+      include("sql.php");
+       $sql="SELECT * FROM mission where left_blog !='' ";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+while($row = $result->fetch_assoc()) 
+{
+   $image='photos/'.$row['left_image']; 
+
+ echo "\"".$row['left_blog']."\"";
+}
+
+}?>
+               
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mbr-figure"  style="width: 60%;">
+                     <img src="<?echo $image;?>" >  
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-8 ">
+                <div class="media-container-row">
+                    <div class="media-content">
+                        <div class="mbr-section-text">
+                            <p class="mbr-text align-center mb-0 mbr-fonts-style display-7">
+                <?
+      include("sql.php");
+       $sql="SELECT * FROM mission where right_blog !='' ";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+while($row = $result->fetch_assoc()) 
+{
+   $image='photos/'.$row['right_image']; 
+
+ echo "\"".$row['right_blog']."\"";
+}
+
+}?>
+               
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mbr-figure" style="width: 60%;">
+                     <img src="<?echo $image;?>" >  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--footer-->
+<section class="cid-qTkAaeaxX5" id="footer1-2" style="margin-top: 10px;">
+
+    <div class="container">
+        <div class="media-container-row">
+
+            <div class="col-md-9">
+                <p class="mbr-text align-center links mbr-fonts-style display-7" style="font-size: 12px;text-align: center;">
+                    <a   style="color: #767676;">FAQ</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a   style="color: #767676;">TERMS OF SERVICE</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a  style="color: #767676;">PRIVACY POLICY</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a   style="color: #767676;">VOLUNTEER</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a   style="color: #767676;">CONTACT US</a>
+                </p>
+                 <div class="footer-lower">
+
+            <div class="media-container-row mbr-white">
+                <div class="col-sm-5 copyright">
+                    <p class="mbr-text lign-center  mbr-fonts-style display-7">
+                        Copyright © 2019. All Rights Reserved
+                    </p>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+       
+    </div>
+</section>
+
+<!--footer-->
+</div>
+
+
+
+                  <a  href="https://all4sale.ph">
+                         <img class="float_main" src="logo1.png" style="height: 6.5rem; z-index: 999999999999999999;">
+                  </a>
+         
+
+<?
+if (!empty($_SESSION['u_id'])) 
+{
+$u_id =$_SESSION['u_id'];
+?>
+<div>
+
+  <?
+      include("sql.php");
+       $sql="SELECT *  FROM cart where u_id ='$u_id'";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+while($row = $result->fetch_assoc()) 
+{
+   $countCaty +=1; 
+
+}
+
+ }
+?>
+<a onclick="next('window','cart.php');"  href="#" class="float">
+<i  class="fa fa-cart-plus  fa-lg" style="margin-top: 18px;" aria-hidden="true"></i>
+<?
+if(empty($countCaty))
+{
+
+}
+else
+{
+echo "<div class=\"deo_qty\">$countCaty</div>";
+}
+
+
+?>
+</a>
+
+ 
+
+ <?
+      include("sql.php");
+       $sql="SELECT *  FROM product_wishlist where u_id ='$u_id'";
+        $result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+while($row = $result->fetch_assoc()) 
+{
+   $dd +=1; 
+
+}
+
+ }
+?>
+<a onclick="next('window','wishlist.php');"  href="#" class="float" style="margin-top: 60px;">
+<i class="fa fa-heart my-float fa-lg" style="margin-top: 18px;"aria-hidden="true"></i>
+
+<?
+if(empty($dd))
+{
+
+}
+else
+{
+echo "<div class=\"deo_qty\">$dd</div>";
+}
+
+
+?>
+</a>
+
+</div>
+
+<?
+}
+?>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="jquery.flipbox.js"></script>
+               <script>
+            $('#box4').flipbox({
+                vertical: false,
+                autoplay: true,
+                autoplayReverse: true,
+                autoplayWaitDuration: 4000,
+                autoplayPauseOnHover: true
+            });
+             $('#box5').flipbox({
+                vertical: false,
+                autoplay: true,
+                autoplayReverse: true,
+                autoplayWaitDuration: 5000,
+                autoplayPauseOnHover: true
+            });
+              $('#box6').flipbox({
+                vertical: false,
+                autoplay: true,
+                autoplayReverse: true,
+                autoplayWaitDuration: 2000,
+                autoplayPauseOnHover: true
+            });
+               $('#box7').flipbox({
+                vertical: false,
+                autoplay: true,
+                autoplayReverse: true,
+                autoplayWaitDuration: 3000,
+                autoplayPauseOnHover: true
+            });
+     
+
+
+            // Buttons
+            $('button.prev').click(function() {
+                $(this).closest('.item').find('.box').flipbox('prev', $(this).hasClass('reverse'));
+            });
+            $('button.next').click(function() {
+                $(this).closest('.item').find('.box').flipbox('next', $(this).hasClass('reverse'));
+            });
+            $('button.jump').click(function() {
+                $(this).closest('.item').find('.box').flipbox('jump', $(this).data('index'), $(this).hasClass('reverse'));
+            });
+            $('button.config').click(function() {
+                $(this).closest('.item').find('.box')
+                    .flipbox({
+                        animationDuration: $(this).data('duration'),
+                        animationEasing: $(this).data('easing')
+                    })
+                    .flipbox('next');
+            });
+        </script>
+
+
+   <script>
+
+
+    
+
+var hidden;
+
+function uploadIt(name,target, thengoto){
+var form = document.forms.namedItem(name);
+form.addEventListener('submit', function(ev) {
+
+      oData = new FormData(form);
+
+  oData.append("CustomField", "This is some extra data");
+
+  var oReq = new XMLHttpRequest();
+  oReq.open("POST", target, true);
+  oReq.onload = function(oEvent) {
+    if (oReq.status == 200) {      
+      ShowInfo(oReq.responseText);
+      if(oReq.responseText=="success"){
+      ajaxpagefetcher.load('window', thengoto, true);
+      }
+    } else {
+      ShowInfo("Error " + oReq.status + " occurred when trying to upload your file.");
+      hidden.style.display = "block";
     }
+  };
 
-    function hideMe(id){
-        var x = document.getElementById(id);
+  oReq.send(oData);
+  ev.preventDefault();
+}, false);
+}
+
+function hideMe(id){
+var x = document.getElementById(id);
 //x.style.display = "none";
 x.innerHTML = "Uploading please wait <img src=\"./images/loading.gif\" width=\"20px\"> ";
 hidden = x;
@@ -279,11 +803,36 @@ ShowInfo("Uploading please wait");
 }
 
 function showMe(){
-    hidden.style.display = "block";
+hidden.style.display = "block";
 }
+
+function next(id,goto)
+{
+  ajaxpagefetcher.load(id,goto);
+}
+
 </script>
+<?
 
-
+if($_GET["testing"]=="yes"){
+    ?>
+    <script>
+        function informArt(info){
+      
+        }
+        
+       
+        
+    </script>
+    <?
+} else{
+    ?>
+    <script>
+        function informArt(info){ }
+    </script>
+    <?
+} 
+?>
 <?
 if($_GET["m"] == "mobile"){
     ?>
@@ -301,10 +850,6 @@ window.location.href = 'magetech://loadMobile?';
     <?
 }
 ?>
-<script type="text/javascript" src="art.js"></script>
-
-
-<script src="./js/pikaday.js"></script>
 <script>
 
     function getDate(id){
@@ -331,41 +876,65 @@ window.location.href = 'magetech://loadMobile?';
     }
 });
     }
+
+   function hideMe(id){
+var x = document.getElementById(id);
+x.style.display = "none";
+hidden = x;
+}
 </script>        
 
 
-
-
 <?
 
-if($_GET["testing"]=="yes"){
-    ?>
-    <script>
-        function informArt(info){
-            alert(info);
-        }
-        
-       
-        
-    </script>
-    <?
-} else{
-    ?>
-    <script>
-        function informArt(info){ }
-    </script>
-    <?
-} 
-?>
-
-<?
 include("body_end.php");
-include("body_end_dev1.php");
 include("body_end_dev2.php");
-include("body_end_dev3.php");
+
 ?>
+<style type="text/css">
+ .modal-backdrop
+{
+    opacity:0.1 !important;
+}
+.mbr-fullscreen {
+     background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+</style>
   
-      
-        
-    </body>
+<!---carousel-->
+   <script src="assets/vendors/highlight.js"></script>
+    <script src="assets/js/app.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script>
+  <script src="assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="assets/popper/popper.min.js"></script>
+  <script src="assets/tether/tether.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/dropdown/js/nav-dropdown.js"></script>
+  <script src="assets/dropdown/js/navbar-dropdown.js"></script>
+  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
+  <script src="assets/parallax/jarallax.min.js"></script>
+  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/theme/js/script.js"></script>
+  <script type="text/javascript" src="engine1/wowslider.js"></script>
+    <script type="text/javascript" src="engine1/script.js"></script>
+  <script type="text/javascript" src="ajax.js"></script>
+    <script type="text/javascript" src="art.js"></script>
+
+   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  
+    <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/nouislider.min.js"></script>
+        <script src="js/jquery.zoom.min.js"></script>
+        <script src="js/main.js"></script>
+</body>
 </html>

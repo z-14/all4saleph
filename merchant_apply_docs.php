@@ -43,7 +43,7 @@ function docs($u_id)
 ?>
 
 <div id="dd">
-<?docs($_SESSION["u_id"]);?>
+
 
 
 	<br>

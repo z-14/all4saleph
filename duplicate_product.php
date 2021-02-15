@@ -36,10 +36,9 @@ if(isset($_GET['delete_photo']))
     <div class="cotainer">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
- <div class="btn-group">
-  <button class="btn ddd  btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="deo_card_container deo_card_create  deo_card_shadow">
+                    <div class="">
+<span class="deo_span" style="border-bottom-style: line; font-size: 20px;">
     <?if($full_details == "yes")
     {
       echo "Full Details";
@@ -51,11 +50,8 @@ if(isset($_GET['delete_photo']))
     }
     ?>
 
-  </button>
-  <div class="dropdown-menu">
-
-  </div>
-</div>
+  </span>
+<hr>
 
 
                     </div>
@@ -83,10 +79,10 @@ if(isset($_GET['delete_photo']))
                             <div class="row">
 
 <div class="col-md-12 col-lg-12">
-  <button  style="margin-top: 10px;" class="add_cart_btn  btn-block"  type="submit"data-toggle="modal" data-target=".bd-example-modal-lg">Add Photos</button>
+  <button  style="margin-top: 10px;" class="button full-width button-sliding-icon ripple-effect"  type="submit"data-toggle="modal" data-target=".bd-example-modal-lg">Add Photos</button>
                               </div>
 <div class="col-md-12 col-lg-12">
- <button style="margin-top: 10px;" class="add_cart_btn  btn-block" onClick="postIt('duplicate_product_reg.php?product_id=<?echo $_GET["product_id"];?>'),hidePT()">Save</button>
+ <button style="margin-top: 10px;" class="button full-width button-sliding-icon ripple-effect" onClick="postIt('duplicate_product_reg.php?product_id=<?echo $_GET["product_id"];?>'),hidePT()">Save</button>
 
                               </div><!-- /col -->
                                <!-- /col -->
@@ -112,7 +108,9 @@ if(isset($_GET['delete_photo']))
 </div>
 
  
-         <?
+        <?
+           
+    
 function basic_details($product_id)
 {
 
@@ -152,17 +150,17 @@ include("sql.php");
 
   ?>
   <div class="form-group col-lg-12">
-       <label for="product_name">Product Name <span>*</span></label>
-      <input type="text" value="<?echo $product_name;?>" onchange="addtoPost('&product_name='+this.value)"class="form-control" placeholder="Product Name"/>
+       <label for="product_name"><span class="deo_span">Product Name </span></label>
+      <input type="text" value="<?echo $product_name;?>" onchange="addtoPost('&product_name='+this.value)"class="deo_form" placeholder="Product Name"/>
  </div>
 
- <div class="form-group col-lg-12"><label for="product_price">Product Price <span>*</span></label>
-        <input type="number" id="product_price"  value="<?echo $product_price;?>" onchange="addtoPost('&product_price='+this.value)"  oninput="showPass('product_price: '+ this.value);" onclick="showPass('product_price: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="Product Price" name="" /></div>
+ <div class="form-group col-lg-12"><label for="product_price"><span class="deo_span">Product Price </span></label>
+        <input type="number" id="product_price"  value="<?echo $product_price;?>" onchange="addtoPost('&product_price='+this.value)"  oninput="showPass('product_price: '+ this.value);" onclick="showPass('product_price: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="Product Price" name="" /></div>
 
         
          <div class="form-group col-lg-12">
-<label for="product_cat">Address<span>*</span></label>
-<select id="province"class="form-control input-lg" value="<?echo $add;?>" onchange="addtoPost('&address='+this.value)">
+<label for="product_cat"><span class="deo_span">Address</span></label>
+<select id="province"class="deo_form input-lg" value="<?echo $add;?>" onchange="addtoPost('&address='+this.value)">
   <option disabled selected="" value="<?echo $add;?>"><?echo $add;?></option>
     <option value="Abra">Abra</option>
     <option value="Agusan del Norte">Agusan del Norte</option>
@@ -250,10 +248,9 @@ include("sql.php");
  </div>
 
   <div class="form-group col-lg-12">
- <label for="product_desc">Product Description <span>*</span></label>
+ <label for="product_desc"><span class="deo_span">Product Description</span></label>
            <textarea type="text" id="product_desc"  value="<?php echo $product_desc;?>" onchange="addtoPost('&product_desc='+this.value)"  oninput="showPass('product_desc: '+ this.value);" onclick="showPass('product_desc: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="Describe what you are selling any details a buyer be interested." name="" ><?php echo $product_desc;?></textarea>
   </div>
-
 
 
 <?
@@ -271,13 +268,13 @@ function Tv($screen_tech,$brand,$screen_size)
   ?>
 
   <div class="form-group col-lg-4">
-            <label for="storage">Brand<span>*</span></label>
-    <input type="text" id="ram"  value="<?php echo $brand; ?>" onchange="addtoPost('&brand='+this.value)"  oninput="showPass('storage: '+ this.value);" onclick="showPass('Model: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="brand" name="" />
+            <label for="storage"><span class="deo_span">Brand</span></label>
+    <input type="text" id="ram"  value="<?php echo $brand; ?>" onchange="addtoPost('&brand='+this.value)"  oninput="showPass('storage: '+ this.value);" onclick="showPass('Model: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="brand" name="" />
     </div>
 
  <div class="form-group col-lg-4"   >
-            <label for="storage">Screen Tech<span>*</span></label>
-    <select id="ram"class="form-control input-lg" onchange="addtoPost('&screen_tech='+this.value)" >
+            <label for="storage"><span class="deo_span">Screen Tech</span></label>
+    <select id="ram"class="deo_form input-lg" onchange="addtoPost('&screen_tech='+this.value)" >
         <option disabled selected="" value="<?php echo $screen_tech; ?>"><?php echo $screen_tech; ?></option>
 
       <option value="LED">LED</option>
@@ -289,8 +286,8 @@ function Tv($screen_tech,$brand,$screen_size)
     </div>
 
     <div class="form-group col-lg-4"   >
-            <label for="storage">Screen Size(in)<span>*</span></label>
-    <select id="ram"class="form-control input-lg" onchange="addtoPost('&screen_size='+this.value)" >
+            <label for="storage"><span class="deo_span">Screen Size(in)</span></label>
+    <select id="ram"class="deo_form input-lg" onchange="addtoPost('&screen_size='+this.value)" >
         <option disabled selected="" value="<?php echo $screen_size; ?>"><?php echo $screen_size; ?></option>
 
       <option value="up to 23 in">up to 23 in</option>
@@ -310,13 +307,13 @@ function makeup($brand,$type)
   ?>
 
   <div class="form-group col-lg-4">
-            <label for="storage">Brand<span>*</span></label>
-    <input type="text"  value="<?php echo $brand; ?>" onchange="addtoPost('&brand='+this.value)"  oninput="showPass('storage: '+ this.value);" onclick="showPass('Model: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="brand" name="" />
+            <label for="storage"><span class="deo_span">Brand</span></label>
+    <input type="text"  value="<?php echo $brand; ?>" onchange="addtoPost('&brand='+this.value)"  oninput="showPass('storage: '+ this.value);" onclick="showPass('Model: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="brand" name="" />
     </div>
 
  <div class="form-group col-lg-4"   >
-            <label for="storage">Type<span>*</span></label>
-    <select id="Brand"class="form-control input-lg" onchange="addtoPost('&type='+this.value)" >
+            <label for="storage"><span class="deo_span">Type</span></label>
+    <select id="Brand"class="deo_form input-lg" onchange="addtoPost('&type='+this.value)" >
         <option disabled selected="" value="<?php echo $type; ?>"><?php echo $type; ?></option>
       <option value="Foundation">Foundation</option>
         <option value="Highlighter">Highlighter</option>
@@ -346,12 +343,12 @@ function cellphone($color,$storage)
 {
   ?>
     <div class="form-group col-lg-4">
-            <label for="color">Color<span>*</span></label>
-    <input type="text"  value="<?php echo $color; ?>" onchange="addtoPost('&color='+this.value)"  oninput="showPass('color: '+ this.value);" onclick="showPass('color: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="color" name="" />
+            <label for="color"><span class="deo_span">Color</span></label>
+    <input type="text"  value="<?php echo $color; ?>" onchange="addtoPost('&color='+this.value)"  oninput="showPass('color: '+ this.value);" onclick="showPass('color: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="color" name="" />
     </div>
     <div class="form-group col-lg-4" id="tv2" >
             <label for="storage">Storage<span>*</span></label>
-    <select id="ram"class="form-control input-lg" onchange="addtoPost('&storage='+this.value)" >
+    <select id="ram"class="deo_form input-lg" onchange="addtoPost('&storage='+this.value)" >
       <option disabled selected="" value="<?php echo $storage; ?>"><?php echo $storage; ?></option>
       <option value="8GB">8GB</option>
         <option value="16GB">16GB</option>
@@ -370,8 +367,8 @@ function Men($type,$color,$size,$brand,$sub_name)
   ?>
    
     <div class="form-group col-lg-12" id="tv2" >
-            <label for="storage">Type<span>*</span></label>
-    <select id="type"class="form-control input-lg" onchange="checkvalue(this.value);addtoPost('&type='+this.value)" >
+            <label for="storage"><span class="deo_span">Type</span></label>
+    <select id="type"class="deo_form input-lg" onchange="checkvalue(this.value);addtoPost('&type='+this.value)" >
       <option disabled selected="" value="<?php echo $type; ?>"><?php echo $type; ?></option>
       <option value="Bag and wallet">Bag & Wallets</option>
         <option value="Footwear">Footwear</option>
@@ -394,13 +391,13 @@ else
 {
   ?>
 <div class="form-group col-lg-12" id="deo_color">
-            <label for="color">Color<span>*</span></label>
-    <input type="text"  value="<?php echo $color; ?>" onchange="addtoPost('&color='+this.value)"  oninput="showPass('color: '+ this.value);" onclick="showPass('color: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="color" name="" />
+            <label for="color"><span class="deo_span">Color</span></label>
+    <input type="text"  value="<?php echo $color; ?>" onchange="addtoPost('&color='+this.value)"  oninput="showPass('color: '+ this.value);" onclick="showPass('color: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="color" name="" />
     </div>
 
  <div class="form-group col-lg-12" id="deo_size">
-            <label for="color">Size<span>*</span></label>
-    <input type="text"  value="<?php echo $size; ?>" onchange="addtoPost('&size='+this.value)"  oninput="showPass('color: '+ this.value);" onclick="showPass('color: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="Size" name="" />
+            <label for="color"><span class="deo_span">Size</span></label>
+    <input type="text"  value="<?php echo $size; ?>" onchange="addtoPost('&size='+this.value)"  oninput="showPass('color: '+ this.value);" onclick="showPass('color: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="Size" name="" />
     </div>
   <?
 }
@@ -411,8 +408,8 @@ else
 
     
       <div class="form-group col-lg-12">
-            <label for="color">Brand<span>*</span></label>
-    <input type="text"  value="<?php echo $brand; ?>" onchange="addtoPost('&brand='+this.value)"  oninput="showPass('color: '+ this.value);" onclick="showPass('color: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="Optional" name="" />
+            <label for="color"><span class="deo_span">Brand</span></label>
+    <input type="text"  value="<?php echo $brand; ?>" onchange="addtoPost('&brand='+this.value)"  oninput="showPass('color: '+ this.value);" onclick="showPass('color: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="Optional" name="" />
     </div>
 
 
@@ -467,12 +464,12 @@ function full_details($product_id,$sub_name)
   ?>
 
   <div class="form-group col-lg-12">
-       <label for="product_name">Product Name <span>*</span></label>
-                             <input type="text" id="product_name"  value="<?php echo $product_name; ?>"onchange="addtoPost('&product_name='+this.value)"  oninput="showPass('product_name: '+ this.value);"  class="form-control" placeholder="Product Name" name=""   disabled="disabled" >
+       <label for="product_name"><span class="deo_span">Product Name </span></label>
+                             <input type="text" id="product_name"  value="<?php echo $product_name; ?>"onchange="addtoPost('&product_name='+this.value)"  oninput="showPass('product_name: '+ this.value);"  class="deo_form" placeholder="Product Name" name="" />
  </div>
    <div class="form-group col-lg-12">
-       <label for="product_qty">Product Quantity <span>*</span></label>
-                             <input type="text" id="product_qty"  value="<?php echo $product_qty; ?>"onchange="addtoPost('&product_qty='+this.value)"  oninput="showPass('product_qty: '+ this.value);"  class="form-control" placeholder="Product Quantity" name="" />
+       <label for="product_qty"><span class="deo_span">Product Quantity</span></label>
+                             <input type="text" id="product_qty"  value="<?php echo $product_qty; ?>"onchange="addtoPost('&product_qty='+this.value)"  oninput="showPass('product_qty: '+ this.value);"  class="deo_form" placeholder="Product Quantity" name="" />
  </div>
 <?
 
@@ -497,8 +494,8 @@ Men($type,$color,$size,$brand,$sub_name);
 
 ?>
   <div class="form-group col-lg-12">
-<label for="product_cat">Getting This<span>*</span></label>
-<select disabled="disabled" class="form-control input-lg" onchange="deliver(this.value);addtoPost('&getting This='+this.value)">
+<label for="product_cat"><span class="deo_span">Getting This</span></label>
+<select class="deo_form input-lg" onchange="deliver(this.value);addtoPost('&getting This='+this.value)">
      <option disabled selected="" value="<?echo $getting_this;?>"><?echo $getting_this;?></option>
     <option value="Meet">Meet-up</option>
      <option value="Delivery">Delivery</option>
@@ -509,8 +506,8 @@ Men($type,$color,$size,$brand,$sub_name);
 {
 ?>
 <div class="form-group col-lg-12"id="meet"   >
-            <label for="storage">Location<span>*</span></label>
-    <input disabled="disabled" type="text" id="ram"  value="<?echo $location;?>" onchange="addtoPost('&location='+this.value)"  oninput="showPass('storage: '+ this.value);" onclick="showPass('Model: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="" name="" />
+            <label for="storage"><span class="deo_span">Location</span></label>
+    <input type="text" id="ram"  value="<?echo $location;?>" onchange="addtoPost('&location='+this.value)"  oninput="showPass('storage: '+ this.value);" onclick="showPass('Model: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="" name="" />
     </div>
 <?
 }
@@ -518,8 +515,8 @@ else
 {
   ?>
      <div class="form-group col-lg-12"id="add"  >
-            <label for="storage">Fee<span>*</span></label>
-    <input disabled="disabled" type="text" id="ram"  value="" onchange="addtoPost('&fee='+this.value)"  oninput="showPass('storage: '+ this.value);" onclick="showPass('Model: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="Fee" name="" />
+            <label for="storage"><span class="deo_span">Fee</span></label>
+    <input type="text" id="ram"  value="" onchange="addtoPost('&fee='+this.value)"  oninput="showPass('storage: '+ this.value);" onclick="showPass('Model: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="Fee" name="" />
     </div>
 
   <?
@@ -530,13 +527,13 @@ else
 
 
 
- <div class="form-group col-lg-12"><label for="product_price">Product Price <span>*</span></label>
-        <input type="number" id="product_price"  value="<?echo $product_price;?>" onchange="addtoPost('&product_price='+this.value)"  oninput="showPass('product_price: '+ this.value);" onclick="showPass('product_price: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="Product Price" name="" /></div>
+ <div class="form-group col-lg-12"><label for="product_price"><span class="deo_span">Product Price</span></label>
+        <input type="number" id="product_price"  value="<?echo $product_price;?>" onchange="addtoPost('&product_price='+this.value)"  oninput="showPass('product_price: '+ this.value);" onclick="showPass('product_price: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="deo_form" placeholder="Product Price" name="" /></div>
 
         
          <div class="form-group col-lg-12">
-<label for="product_cat">Address<span>*</span></label>
-<select disabled="disabled" id="province"class="form-control input-lg" value="<?echo $add;?>" onchange="addtoPost('&address='+this.value)">
+<label for="product_cat"><span class="deo_span">Address</span></label>
+<select id="province"class="deo_form input-lg" value="<?echo $add;?>" onchange="addtoPost('&address='+this.value)">
   <option disabled selected="" value="<?echo $add;?>"><?echo $add;?></option>
     <option value="Abra">Abra</option>
     <option value="Agusan del Norte">Agusan del Norte</option>
@@ -624,9 +621,11 @@ else
  </div>
 
   <div class="form-group col-lg-12">
- <label for="product_desc">Product Description <span>*</span></label>
-           <textarea disabled="disabled" type="text" id="product_desc"  value="<?php echo $product_desc;?>" onchange="addtoPost('&product_desc='+this.value)"  oninput="showPass('product_desc: '+ this.value);" onclick="showPass('product_desc: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="Describe what you are selling any details a buyer be interested." name="" ><?php echo $product_desc;?></textarea>
+ <label for="product_desc"><span class="deo_span">Product Description</span></label>
+           <textarea type="text" id="product_desc"  value="<?php echo $product_desc;?>" onchange="addtoPost('&product_desc='+this.value)"  oninput="showPass('product_desc: '+ this.value);" onclick="showPass('product_desc: '+this.value),anchorIt(this.id),toggleClass(this.id);" class="form-control" placeholder="Describe what you are selling any details a buyer be interested." name="" ><?php echo $product_desc;?></textarea>
   </div>
+
+
 
 <?
 }

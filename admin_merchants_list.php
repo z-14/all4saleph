@@ -9,7 +9,10 @@ $u_u = $_SESSION["u_u"];
 
 
 ?>
-
+<div style="height: 6.1rem; margin-bottom: 10px;">
+            <!-- container -->
+        
+ </div>
   <div class="container mt-3 mb-4">
 
     <div class="col-lg-12">
@@ -24,7 +27,7 @@ $u_u = $_SESSION["u_u"];
             </div>
             <div class="col-lg-4">
 
-<input id="art_search_input" type="text" value="<?echo $_GET["search"];?>" placeholder="Search here" name="" onchange="javascript:ajaxpagefetcher.load('window', 'admin_merchants_list.php?search='+this.value, true)" style="color: gray; border: 1px solid red;">    
+<input class="deo_form" type="text" value="<?echo $_GET["search"];?>" placeholder="Search here" name="" onchange="javascript:ajaxpagefetcher.load('window', 'admin_merchants_list.php?search='+this.value, true)" style="color: gray; border: 1px solid red;">    
 
 </div>
             
@@ -66,11 +69,18 @@ while($row = $result->fetch_assoc())
                      $email = $row["email"];
                      $telephone = $row["telephone"];
                      $address = $row["address"];
-                                      
+                                      $middlename = $row["middlename"];   
+$name_extension = $row["name_extension"];   
+$birthday = $row["birthday"];   
+$mobile_number = $row["mobile_number"]; 
+$website = $row["website"]; 
+$salutation  = $row["salutation"];
+$user_description = $row["user_description"];
+$company_name=$row["company_name"];
                   $imageURL = getProductImage($u_id);
                   $fulldetails=$row["full_details"];
 
-                  wistlist($u_id,$u_u,$imageURL, $firstName,$surname,$merchant_type,$email,$telephone,$address);
+                  wistlist($u_id,$u_u,$imageURL, $firstName,$surname,$merchant_type,$email,$telephone,$address,$middlename,$name_extension,$birthday,$mobile_number,$website,$salutation,$user_description,$company_name);
                 }
               }
 
@@ -138,8 +148,29 @@ function  wistlist($u_id,$u_u,$imageURL, $firstName,$surname,$merchant_type,$ema
                             <span><?echo $telephone;?></span>
                           </div>
                           <div class="seller d-block">
+                            <span>Mobile number: </span>
+                            <span><?echo $mobile_number;?></span>
+                          </div>
+
+                          <div class="seller d-block">
                             <span>Address: </span>
                             <span><?echo $address;?></span>
+                          </div>
+                           <div class="seller d-block">
+                            <span>Website: </span>
+                            <span><?echo $website;?></span>
+                          </div>
+                          <div class="seller d-block">
+                            <span>Salutation: </span>
+                            <span><?echo $salutation;?></span>
+                          </div>
+                             <div class="seller d-block">
+                            <span>Description: </span>
+                            <span><?echo $user_description;?></span>
+                          </div>
+                           <div class="seller d-block">
+                            <span>Company Name: </span>
+                            <span><?echo $company_name;?></span>
                           </div>
                           <div class="cartviewprice d-block">
                             <span class="amt deo_color_price"><?echo $merchant_type;?></span>
@@ -171,7 +202,7 @@ function  wistlist($u_id,$u_u,$imageURL, $firstName,$surname,$merchant_type,$ema
                     <div class="col-lg-3 ml-lg-auto align-self-start mt-2 mt-lg-0">
                       <div class="row-fluid">
                         <div class="prostatus">
-                           <div class="product_buttons f-l">
+                           <div class="circle_btn f-l">
 
 
      <button  onClick="rejectIt('window','admin_merchant_application_action.php?approve=no-<? echo $u_id;?>','admin_merchants_list.php','Are you sure you want to Remove this Merchant?')"  class="product_heart">

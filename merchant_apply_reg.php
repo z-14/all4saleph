@@ -7,7 +7,6 @@ $u_u = $_SESSION["u_u"];
 $u_id = $_SESSION["u_id"];
 
 
-
 function processDateUpdate($name, $value){
 $n = explode("-",$value);
 $newvalue = mktime(0,0,0, $n[0] , $n[1], $n[2]);
@@ -117,7 +116,7 @@ $reg_date_YM = mktime(date("H"),date("i"),date("s"), date("n") , date("j"), date
 $sql2 = "INSERT INTO `user_profile` (`u_id`,`u_u`,".$datakeysfin.") VALUES ('$u_id','$u_u',".$datavaluesfin.");";
 if ($conn->query($sql2) === TRUE) {
   include("notif.php");
-  notif($u_id,'60', $u_u.'New Merchant Request', 'admin_merchant_list_new.php');
+  notif($u_id,'60', $u_u.' New Merchant Request', 'admin_merchant_list_new.php');
     echo "successfully updated";
 } else {
     echo $sql."Error updating record: " . $conn->error;

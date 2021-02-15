@@ -26,8 +26,10 @@ $u_u =$row2["u_u"];
 $admin=$row2["admin"];
 
 $_SESSION['admin'] = $admin ;
+
  }
-}
+	
+    }
 
 
 ?>

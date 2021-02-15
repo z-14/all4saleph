@@ -1,503 +1,571 @@
 <?
-error_reporting(0);
-include ("sessions.php");
-include ("globalconfig.php");
-include ('sql.php');
+
+include("sql.php");
+include("sessions.php");
+
 $u_u = $_SESSION["u_u"];
-?>
-<!-- Header Main -->
-<style type="text/css">
-  .container div
-  {
-    position: relative;
-  }
-</style>
-      <div  class="container">
-        <div class="row">
-
-          <!-- Logo -->
-        
-          <!-- Search -->
-          <div style="display: none;" class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
-          
-                    <div style="display: none;" class="deo_custom_dropdown">
-                      <div class="deo_custom_dropdown_list">
-                        <span style="display: none;" class="deo_custom_dropdown_placeholder clc">All Categories</span>
-                        <ul class="deo_custom_list clc">
-                        </ul>
-                      </div>
-                    </div>
-                
-                  </div>
-          </div>
-      </div>
-    
-    <!-- Main Navigation -->
-
-    <nav class="deo_main_nav">
-      <div class="container mg_left">
-        <div class="row">
-          <div class="col">
-            
-            <div class="deo_main_nav_content d-flex flex-row">
-
-              <!-- Categories Menu -->
-
-              <div class="deo_cat_menu_container">
-                <div class="deo_cat_menu_title d-flex flex-row align-items-center justify-content-start">
-                  <div class="deo_line"><span></span><span></span><span></span></div>
-                  <div class="deo_cat_menu_text">categories</div>
-                </div>
-
-                <ul class="deo_cat_menu">
-                
-                
-                  <li class="deo_sub">
-                    <a href="#">Wholesale<i class="fas fa-chevron-right"></i></a>
-                    <ul>
-                      <!---
-                      <li class="deo_sub">
-                        <a href="#">Menu Item<i class="fas fa-chevron-right">
-                        </i></a>
-                        <ul>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                        </ul>
-                      </li>
---->
-  <?
-                   include("sql.php");
-
-                     $sql="SELECT * FROM product_categories WHERE `cat_type` = 'Wholesale' Limit 5"; 
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) 
-        {
-           ?>
-       <li class="deo_sub">
-                        <a onClick="javascript:ajaxpagefetcher.load('window','shop_item_list.php?categories_id=<?echo $row["cat_name"];?>&cat_type=Wholesale&cat_id=<?echo $row["cat_id"];?>', true),HideMenu()" href="#"><?echo $row["cat_name"];?><i class="fas fa-chevron-right">
-                        </i></a>
-                        <ul>
-                            <?
-                          subcat($row["cat_id"],$row["cat_name"]);
-                          ?>
-                         
-                        </ul>
-                      </li>
-                     
-          <?
-        }
-        }
-  
-           ?>
-
-                     <li class="last call"> 
-                        <a onClick="javascript:ajaxpagefetcher.load('window','all_categories.php?cat_type=Wholesale', true),HideMenu()"href="#">All Wholesale Categories<i class="fas fa-chevron-right">
-                        </i></a>
-                      </li>
-
-                        <li class="last call"> 
-                        <a onClick="javascript:ajaxpagefetcher.load('window','supplier.php?cat_type=Wholesale', true),HideMenu()" href="#">View Supplier<i class="fas fa-chevron-right">
-                        </i></a>
-                      </li>
-                     
-                    </ul>
-                  </li>
 
 
-
-
-  
-
-                     <li class="deo_sub">
-                    <a href="#">Retail<i class="fas fa-chevron-right"></i></a>
-                    <ul>
-                      <!---
-                      <li class="deo_sub">
-                        <a href="#">Menu Item<i class="fas fa-chevron-right">
-                        </i></a>
-                        <ul>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                        </ul>
-                      </li>
---->
-  <?
-                   include("sql.php");
-
-                      $sql="SELECT * FROM product_categories WHERE `cat_type` = 'Retail' limit 5"; 
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) 
-                {
-           ?>
-       <li class="deo_sub">
-                        <a onClick="javascript:ajaxpagefetcher.load('window','shop_item_list.php?categories_id=<?echo $row["cat_name"];?>&cat_type=Retail&cat_id=<?echo $row["cat_id"];?>', true),HideMenu()"><?echo $row["cat_name"];?><i class="fas fa-chevron-right">
-                        </i></a>
-                        <ul>
-                        <?
-                          subcat($row["cat_id"],$row["cat_name"]);
-                          ?>
-                        </ul>
-                      </li>
-                     
-          <?
-        }
-        }
-  
-           ?>
-
-                     <li class="last call"> <a onClick="javascript:ajaxpagefetcher.load('window','all_categories.php?cat_type=Retail', true),HideMenu()" href="#">All Retail Categories<i class="fas fa-chevron-right">
-                        </i></a>
-                      </li>
-
-
-                          <li class="last call">
-                        <a onClick="javascript:ajaxpagefetcher.load('window','supplier.php?cat_type=Retail', true),HideMenu()" href="#">View Supplier<i class="fas fa-chevron-right">
-                        </i></a>
-                      </li>
-                    
-                     
-                    </ul>
-                  </li>
-
-
-        <li class="deo_sub">
-                    <a href="#">Others<i class="fas fa-chevron-right"></i></a>
-                    <ul>
-                      <!---
-                      <li class="deo_sub">
-                        <a href="#">Menu Item<i class="fas fa-chevron-right">
-                        </i></a>
-                        <ul>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                        </ul>
-                      </li>
---->
-  <?
-                   include("sql.php");
-
-                         include("sql.php");
-
-                             $sql="SELECT * FROM product_categories WHERE `cat_type` = 'Others' limit 5"; 
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) 
-                {
-
-           ?>
-       <li class="deo_sub">
-                        <a onClick="javascript:ajaxpagefetcher.load('window','shop_item_list.php?categories_id=<?echo $row["cat_name"];?>&cat_type=Retail&cat_id=<?echo $row["cat_id"];?>', true),HideMenu()"><?echo $row["cat_name"];?><i class="fas fa-chevron-right">
-                        </i></a>
-                        <ul>
-                          <?
-                        subcat($row["cat_id"],$row["cat_name"]);
-                          ?>
-                        </ul>
-                      </li>
-                     
-          <?
-        }
-        }
-  
-           ?>
-
-                      <li class="last call">
-                        <a onClick="javascript:ajaxpagefetcher.load('window','all_categories.php?cat_type=Others', true),HideMenu()" href="#">All Others Categories<i class="fas fa-chevron-right">
-                        </i></a>
-                      </li>
-
-                       <li class="last call">
-                        <a onClick="javascript:ajaxpagefetcher.load('window','supplier.php?cat_type=Others', true),HideMenu()" href="#">View Supplier<i class="fas fa-chevron-right">
-                        </i></a>
-                      </li>
-                     
-                    </ul>
-                  </li>
-
-
-
-                </ul>
-              </div>
-
-              <!-- Main Nav Menu -->
-
-              <div class="deo_main_nav_menu ml-20">
-            <ul class="deo_standard_dropdown deo_main_nav_dropdown">
-                  
-                            
-                            <?
-                            if(!empty($_SESSION["u_id"])){
-                            ?>
-                  <li class="deo_sub">
-                    <a href="#">Menu<i class="fas fa-chevron-down"></i></a>
-                    <ul>
-                      <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'user_profile.php', true)">My Profile<i class="fas fa-chevron-down"></i></a></li>
-
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'wishlist_list.php', true)">My Wishlist<i class="fas fa-chevron-down"></i></a></li>
-
-                        <li>
-                        <a href="#"onClick="  javascript:ajaxpagefetcher.load('window', 'cart_list.php', true)">My Cart<i class="fas fa-chevron-down"></i></a></li>
-
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'merchant_messages_list.php', true)">Messages<i class="fas fa-chevron-down"></i></a></li> 
-              <?
-                        if($_SESSION['merchant'] > 0)
-                                         {
-                                         }
-                                  
-                                 else
-                                 {
-                                       ?>
-      
-                         <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'merchant_apply.php', true)">Be a merchant<i class="fas fa-chevron-down"></i></a></li> 
-                                     <?
-                                 }
-                                 ?>
-
-                                   <?
-                          if($_SESSION["m"]=="mobile" || $_GET["m"]=="mobile"){
-                                    ?>
-
-    <li>
-          <a href="#"onClick="Logout()">Logout<i class="fas fa-chevron-down"></i></a></li> 
-
-                                    <?
-                                    } else{
-                                    ?>
-  <li>
-        <a href="#"onClick="Logout()">Logout<i class="fas fa-chevron-down"></i></a></li> 
-
-                                    
-                                    <?
-                                    }
-                                    ?>
-
-                  
-                    </ul>
-                  </li>
-<?
-}
-else
+function sub_cat($cat_id,$cat,$cat_name,$type)
 {
-  ?>
-      <li>     
- <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'login_mobile.php', true)">Login<i class="fas fa-chevron-down"></i></a></li>
+  $deo_cat = $cat;
 
-                            
-                            <?
-}
+   
+
+    include("sql.php");
+    $sql="SELECT * FROM product_subCat where cat_id = '$cat_id' Order by s_id asc"; 
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) 
+    {
+      ?>
 
 
+
+  <div  class="dropdown">
+
+         <a  class="text-white dropdown-item  display-4 deo_collapse deo_show_coll " aria-expanded="false"  data-toggle="dropdown-submenu"><i class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span class=""  onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')"><?echo $cat;?></span></a>
+
+         <a  class="text-white dropdown-item  display-4  deo_hide_coll dropdown-toggle" style="display: none;" aria-expanded="false"  data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span class="" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" onclick="next('window','shop.php?type=<?echo $type; ?>&cat=<?echo $cat_name;?>')"><?echo  $deo_cat;?></span></a>
+
+       
+
+    <div class="dropdown-menu dropdown-submenu p-2">
+
+
+         <?
+      while($row = $result->fetch_assoc())
+       { 
+        ?>
+
+ 
+             <a class="text-white dropdown-item display-4 dd deo_collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation"onclick="next('window','shop.php?type=<?echo $type;?>&cat=<?echo $cat_name;?>&sub=<?echo  $row["sub_name"];?>');" ><span class="dd"><?echo $row["sub_name"];?></span></a>
+
+      
+        <?
+       }
+
+
+      ?>
+       </div>
+ </div>
+
+      <?
+   }else
+   {
 ?>
+  <div  class="dropdown">
+         <a  class="text-white dropdown-item  display-4 deo_show_coll " aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','shop.php?type=<?echo $type;?>&cat=<?echo $cat_name;?>');"><?echo $cat;?></span></a>
+
+          <a  class="text-white dropdown-item  display-4 deo_hide_coll"style="display: none;"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span onclick="next('window','shop.php?type=<?echo $type;?>&cat=<?echo $cat_name;?>');"><?echo $deo_cat;?></span></a>
+       </div>
+
+<?
+
+
+
+   }
+ }
+
+        
+
+  ?>
+
 
   <?
-                             if($_SESSION['merchant'] > 0)
-                                         {
-                                 
-                            ?>
-                  <li class="deo_sub">
-                    <a href="#">Merchant's <i class="fas fa-chevron-down"></i></a>
-                    <ul>
-                      <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'product_image_first.php', true)">Sell an item<i class="fas fa-chevron-down"></i></a></li>
 
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'merchant_inventory_product.php', true)">Inventory<i class="fas fa-chevron-down"></i></a></li>
+?>  
 
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'merchant_messages_list.php', true)">Messages<i class="fas fa-chevron-down"></i></a></li>
+  <section class="menu cid-qTkzRZLJNu" once="menu" id="menu1-0">
+   
+    <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm bg-color transparent">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+       
+           <div class="menu-logo mobile_view">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="index.php">
+                         <img src="logo1.png"  style="height: 4.5rem; margin-top: 5px;">
+                    </a>
+                </span>
+                
+            </div>
+        </div>                 
+     
 
-                    </ul>
-                  </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+   
+          <div class="col-lg-6 p-0">
+
+             <div class="header-search">
+                                <div class="col-lg-12" style="width: 100%;">
+                                    <select class="input-select" id="deo_cat_id">
+                                      <option value="" disabled selected>Categories</option>
+                                        <option value="Wholesale">Wholesale</option>
+                                        <option value="Retail">Retail</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <input class="input" onchange="deo_head_search(this.value,'deo_cat_id')" id="d_seach_head" placeholder="Search here">
+                                    <button class="search-btn">Search</button>
+                                </div>
+                    </div>
+                  </div>
+
+           <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+
+
+       <li class="nav-item dropdown" >
+                <a style="font-weight: 650;"  class="nav-link link text-white dropdown-toggle display-4" data-toggle="dropdown-submenu" aria-expanded="false"><span class="mbr-iconfont mbr-iconfont-btn"></span>
+                     Wholesale
+                    </a>
+                    <div class="dropdown-menu">
+<div style="background-color: #50312f; padding-top: 5px; padding-bottom:5px; border-radius: 5px;">
+                  
+             
+
+ 
+<!---start-->
 <?
-}?>
+    include("sql.php");
+    $sql="SELECT * FROM product_categories where cat_type = 'Wholesale' Order by cat_id asc"; 
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc())
+       { 
+
+          $cat_id=$row["cat_id"];
+          $cat_name=$row["cat_name"];
+          $cat=$row["cat_name"];
+          $name="Wholesale";
+ sub_cat($cat_id,$cat,$cat_name,$name);
+
+       }
+     }
+?>
+    
+<!--end -->
+              
+
+            </div>
+
+          </div>
+<!---end --->
+                </li>
+
+                <li class="nav-item dropdown" >
+                <a style="font-weight: 650;"  class="nav-link link text-white dropdown-toggle display-4" data-toggle="dropdown-submenu" aria-expanded="false"><span class="mbr-iconfont mbr-iconfont-btn"></span>
+                       Retail
+                    </a>
+                    <div class="dropdown-menu">
+<div style="background-color: #50312f; padding-top: 5px; padding-bottom:5px; border-radius: 5px;">
+                 
+
+<!---start-->
+              <?
+
+
+
+
+    include("sql.php");
+    $sql="SELECT * FROM product_categories where cat_type = 'Retail' Order by cat_id asc"; 
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc())
+       { 
+
+          $cat_id=$row["cat_id"];
+          $cat_name=$row["cat_name"];
+          $cat=$row["cat_name"];
+          $name="Retail";
+ sub_cat($cat_id,$cat,$cat_name,$name);
+
+
+       }
+     }
+
+
+              ?>
+
+
+                           
+
+                           
+                        
+
+                   
+
+
+
+
+            </div>
+          </div>
+<!---end-->
+
+
+                </li>
+
+                 <li class="nav-item dropdown" >
+                <a style="font-weight: 650;"  class="nav-link link text-white dropdown-toggle display-4" data-toggle="dropdown-submenu" aria-expanded="false"><span class="mbr-iconfont mbr-iconfont-btn"></span>
+                       Others
+                    </a>
+                    <div class="dropdown-menu">
+<div style="background-color: #50312f; padding-top: 5px; padding-bottom:5px; border-radius: 5px;">
+
+                      
+<!---start-->
+              <?
+
+
+
+
+    include("sql.php");
+    $sql="SELECT * FROM product_categories where cat_type = 'Others' Order by cat_id asc"; 
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc())
+       { 
+
+          $cat_id=$row["cat_id"];
+          $cat_name=$row["cat_name"];
+          $cat=$row["cat_name"];
+          $name="Others";
+
+        
+
+ sub_cat($cat_id,$cat,$cat_name,$name);
+
+       }
+     }
+
+
+              ?>
+                      
+
+       
+             
+
+
+
+            </div>
+            </div>
+<!---end --->
+                </li>
 
  <?
-                            if($_SESSION['admin'] == "yes"){
-                            ?>
-           <li class="deo_sub">
-                    <a href="#">Admin <i class="fas fa-chevron-down"></i></a>
-                    <ul>
-                      <li>
+                   if(!empty($u_id)){
+                       ?>
+                <li class="nav-item dropdown" >
 
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'admin_merchant_list_new.php', true)">New merchant applications<i class="fas fa-chevron-down"></i></a></li>
-             <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'admin_user_list.php', true)">User's list<i class="fas fa-chevron-down"></i></a></li>
 
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'admin_merchants_list.php', true)">Mechant's list<i class="fas fa-chevron-down"></i></a></li>
+                <a  style="font-weight: 650; border-radius: 5px;" class="nav-link link text-white dropdown-toggle  display-4 " data-toggle="dropdown-submenu" aria-expanded="false"><span class="mbr-iconfont mbr-iconfont-btn"></span>
+                       Menu
+                    </a>
 
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'admin_item_management.php',true)">Item's management<i class="fas fa-chevron-down"></i></a>
-                      </li>
+        
 
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'merchant_messages_list.php', true)">Messages<i class="fas fa-chevron-down"></i></a>
-                      </li>
 
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'add_categories.php', true)">Add Categories<i class="fas fa-chevron-down"></i></a>
-                      </li>
+                    <div class="dropdown-menu">
+<div style="background-color: #50312f; padding-top: 5px; padding-bottom:5px; border-radius: 5px;">
 
-                         <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'adding_sub.php', true)">Add related categories<i class="fas fa-chevron-down"></i></a>
-                      </li>
+     <div class="dropdown">
 
-                         <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'categories_management.php', true)">View all categories<i class="fas fa-chevron-down"></i></a>
-                      </li>
+                        <a   class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','profile.php');">My Profile</span></a>
 
-                 </ul>
-                  </li>
-                  <?}?>
+               <a onclick="next('window','profile.php');"  class="text-white dropdown-item  display-4 deo_hide_coll" style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span >My Profile</span></a>
 
-                </ul>
-              </div>
 
-              <!-- Menu Trigger -->
-
-              <div class="deo_menu_trigger_container ml-auto">
-                <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
-                  <div class="deo_menu_burger">
-                    <div class="deo_menu_trigger_text">menu</div>
-                    <div class="deo_line deo_menu_burger_inner"><span></span><span></span><span></span></div>
-                  </div>
                 </div>
-              </div>
+<?
+   
+              if($_SESSION['merchant'] <=0){
+              ?>
 
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    
-    <!-- Menu -->
+                 <div class="dropdown">
+                        <a  class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="doc_mer(), next('window','merchant_apply.php');">Be a Merchant</span></a>
 
-    <div class="deo_page_menu">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            
-            <div class="deo_page_menu_content">
-              
-              <div class="deo_page_menu_search">
-                <div action="#">
-                  <input type="search" required="required" class="deo_page_menu_search_input" placeholder="Search for products...">
+ <a  onclick="next('window','merchant_apply.php');" class="text-white dropdown-item  display-4 deo_hide_coll"style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span >Be a Merchant</span></a>
+
+
+
+
+
+
+
                 </div>
-              </div>
-              <ul class="deo_page_menu_nav">
-              <li class="deo_page_menu_item has-children">
-                  <a href="#">Menu<i class="fa fa-angle-down"></i></a>
-                  <ul class="deo_page_menu_selection">
-                    <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'user_profile.php', true)">My Profile<i class="fas fa fa-angle-down"></i></a></li>
 
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'wishlist_list.php', true)">My Wishlist<i class="fas fa fa-angle-down"></i></a></li>
 
-                        <li>
-                        <a href="#"onClick="  javascript:ajaxpagefetcher.load('window', 'cart_list.php', true)">My Cart<i class="fas fa fa-angle-down"></i></a></li>
-
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'merchant_messages_list.php', true)">Messages<i class="fa fa-angle-down"></i></a></li> 
-              <?
-                        if($_SESSION['merchant'] > 0)
-                                         {
-                                         }
-                                  
-                                 else
-                                 {
-                                       ?>
-      
-                         <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'merchant_apply.php', true)">Be a merchant<i class="fa fa-angle-down"></i></a></li> 
-                                     <?
-                                 }
-                                 ?>
-
-                                   <?
-                          if($_SESSION["m"]=="mobile" || $_GET["m"]=="mobile"){
-                                    ?>
-
-    <li>
-          <a href="#"onClick="Logout()">Logout<i class="fa fa-angle-down"></i></a></li> 
-
-                                    <?
-                                    } else{
-                                    ?>
-  <li>
-        <a href="#"onClick="Logout()">Logout<i class="fas fa-chevron-down"></i></a></li> 
-
-                                    
-                                    <?
-                                    }
-                                    ?>
-
-                 
-                  </ul>
-                </li>
-
-                <li class="deo_page_menu_item has-children">
-                  <a href="#">Merchant<i class="fa fa-angle-down"></i></a>
-                  <ul class="deo_page_menu_selection">
-                    <?
-                        if($_SESSION['merchant'] > 0)
-                                         {
-                                 
-                            ?>
-                  
-                      <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'product_image_first.php', true)">Sell an item<i class="fa fa-angle-down"></i></a></li>
-
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'merchant_inventory_product.php', true)">Inventory<i class="fa fa-angle-down"></i></a></li>
-
-                        <li>
-                        <a href="#"onClick="javascript:ajaxpagefetcher.load('window', 'merchant_messages_list.php', true)">Messages<i class="fa fa-angle-down"></i></a></li>
-
-              
 <?
 }?>
-                  </ul>
-                </li>
-              
-        
-            
-              </ul>
-            
+                 <div class="dropdown">
+                        <a   class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','wishlist.php');">My Wishlist</span></a>
+
+
+
+                 <a onclick="next('window','wishlist.php');" class="text-white dropdown-item  display-4 deo_hide_coll" style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span >My Wishlist</span></a>
+
+
+
+                       
+
+                </div>
+
+                 <div class="dropdown">
+        <a   class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','cart.php');">My Cart</span></a>
+
+
+          <a onclick="next('window','cart.php');"  class="text-white dropdown-item  display-4 deo_hide_coll"  style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span >My Cart</span></a>
+
+                </div>
+
+                   <div class="dropdown">
+
+                        <a   class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','inbox.php');">Inbox</span></a>
+
+                        <a  onclick="next('window','inbox.php');"  class="text-white dropdown-item  display-4 deo_hide_coll" style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span >Inbox</span></a>
+
+
+                </div>
+
+                 <div class="dropdown">
+                        <a   class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onClick="Logout()">Logout</span></a>
+
+
+                         <a  onClick="Logout()" class="text-white dropdown-item  display-4 deo_hide_coll" style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span >Logout</span></a>
+
+                </div>
+
+         
             </div>
-          </div>
-        </div>
+
+                </li>
+
+                <?
+
+              }?>
+
+              <?
+              if($_SESSION['merchant'] > 0){
+              ?>
+              
+
+                 <li class="nav-item dropdown" >
+                <a class="nav-link link text-white  dropdown-toggle  display-4" data-toggle="dropdown-submenu" aria-expanded="false"><span class="mbr-iconfont mbr-iconfont-btn"></span>
+                       Merchant
+                    </a>
+                    <div class="dropdown-menu">
+<div style="background-color: #50312f; padding-top: 5px; padding-bottom:5px; border-radius: 5px;">
+
+                <div class="dropdown">
 
 
+                        <a   class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','create_product.php');">Sell an Items</span></a>
+
+                        <a  onclick="next('window','create_product.php');" class="text-white dropdown-item  display-4 deo_hide_coll" style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span >Sell an Items</span></a>
+
+                </div>
+
+                   <div class="dropdown">
+                        <a   class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','inventory.php');">Inventory</span></a>
+
+
+                         <a onclick="next('window','inventory.php');"  class="text-white dropdown-item  display-4 deo_hide_coll"style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span >Inventory</span></a>
+
+                </div>
+
+
+            <div class="dropdown">
+
+                        <a   class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','inbox.php');">Inbox</span></a>
+
+                          <a  onclick="next('window','inbox.php');" class="text-white dropdown-item  display-4 deo_hide_coll" style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span >Inbox</span></a>
+
+                </div>
+
+        
+           
+
+            </div>
 </div>
-</div>
-<?
-function subcat($cat_id,$categories_id)
-{
-include("sql.php");
-$sql="SELECT * FROM product_subCat where cat_id ='$cat_id'";
-    $result = $conn->query($sql);
-           if ($result->num_rows > 0) {
-                 while($row = $result->fetch_assoc()) 
-                    {
-                      ?>
- <li><a href="#" onClick="javascript:ajaxpagefetcher.load('window','shop_item_list.php?categories_id=<?echo $categories_id;?>&cat_type=<?echo $row["cat_type"];?>&sub_name=<?echo $row["sub_name"];?>&cat_id=<?echo $cat_id;?>', true),HideMenu()"><?echo $row["sub_name"];?><i class="fas fa-chevron-right"></i></a></li>
-    <?
+                </li>
 
-                    }
-                  }
-}
+                <?
+
+              }?>
+<?if(empty($u_u))
+{?>
+                <li class="nav-item">
+                    <a  style="font-weight: 650;"  onclick="next('window','login.php')" class="nav-link link text-white display-4 deo_show_coll">
+                        Login
+                    </a>
+
+                       <a onclick="next('window','login.php')" style="font-weight: 650; display: none; float: left;" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation"  aria-expanded="false" data-toggle="dropdown-submenu"  class="nav-link link text-white display-4 deo_hide_coll">
+                        Login
+                    </a>
+                </li>
+
+                <?}?>
+
+                <?
+                 if($_SESSION['admin'] == "yes")
+                 {
 
 ?>
+   <li class="nav-item dropdown" >
+                <a class="nav-link link text-white  dropdown-toggle  display-4" data-toggle="dropdown-submenu" aria-expanded="false"><span class="mbr-iconfont mbr-iconfont-btn"></span>
+                       Admin
+                    </a>
+                    <div class="dropdown-menu">
+<div style="background-color: #50312f; padding-top: 5px; padding-bottom:5px; border-radius: 5px;">
+
+                 <div class="dropdown">
+
+                        <a    class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span  onClick="javascript:ajaxpagefetcher.load('window', 'admin_merchant_list_new.php', true)" >New merchant applications  </span></a>
+
+                          <a    class="text-white dropdown-item  display-4 deo_show_coll" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span  onClick="javascript:ajaxpagefetcher.load('window', 'admin_merchants_list.php', true)" >Merchant List</span></a>
+
+
+                          <a  onClick="javascript:ajaxpagefetcher.load('window', 'admin_merchant_list_new.php', true)"   class="text-white dropdown-item  display-4 deo_hide_coll" style="display: none; "data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">&nbsp;&nbsp;&nbsp;<span  >New merchant applications  </span></a>
+
+                </div>
+
+
+            <div class="dropdown">
+
+                        <a   class="text-white dropdown-item  display-4" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','home_page_setting.php ')">Homepage setting</span></a>
+
+
+
+                </div>
+                   <div  class="dropdown">
+                        <a  class="text-white dropdown-item  display-4" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','add_categories.php')">Add Categories</span></a>
+
+                </div>
+
+                 <div  class="dropdown">
+                        <a  class="text-white dropdown-item  display-4" aria-expanded="false" data-toggle="dropdown-submenu">&nbsp;&nbsp;&nbsp;<span onclick="next('window','add_subcat.php')">Add SubCategories</span></a>
+
+                </div>
+
+
+        
+           
+
+            </div>
+</div>
+                </li>
+<?
+
+
+}
+                ?>
+
+            </ul>
+         
+        </div>
+    </nav>
+</section>
+<style type="text/css">
+    .deo_nav_l
+{
+
+}
+
+.dd
+{
+padding-top: 10px;
+padding-bottom: 10px;
+align-items: center;
+justify-content: left;
+}
+
+@media only screen and (max-width: 480px)
+ {
+.deo_nav_l
+{
+  margin-left: 0px;
+}
+
+
+}
+
+@media only screen and (max-width: 991px)
+ {
+  .mobile_view
+{
+  display: block;
+}
+
+.main_view
+{
+  display: none;
+}
+.deo_show_coll
+{
+  display: none !important;
+}
+.deo_hide_coll
+{
+  display: block !important;
+  font-size: 16px!important;
+
+}
+
+.navbar-toggleable-sm .nav-dropdown .dropdown-submenu
+{
+   left: 0px !important;
+}
+}
+.deo_show_coll
+{
+  display: block;
+}
+.deo_hide_coll
+{
+  display: none;
+}
+
+
+
+nav-item, a:hover
+{
+  color:inherit;
+}
+.cid-qTkzRZLJNu .dropdown .dropdown-menu {
+    text-align: left !important;
+}
+.navbar-toggleable-sm .nav-dropdown .dropdown-submenu {
+
+    left: -102%;
+    margin-left: 0.125rem;
+   margin-top: -5px;
+    top: 0;
+    background-color: #50312f;
+}
+
+.navbar-dropdown.bg-color.transparent {
+    background: #50312f;
+}
+
+.header-search div .input-select
+{
+  font-weight: 500;
+}
+
+.nav-dropdown .dropdown-item
+{
+  font-size: 14px;
+}
+
+.deo_left
+{
+  float: left;
+}
+
+</style>

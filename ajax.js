@@ -1,7 +1,7 @@
 
 var ajaxpagefetcher={
 
-loadingmessage: "",
+loadingmessage: "loading...",
 exfilesadded: "",
 
 connect:function(containerid, pageurl, bustcache, jsfiles, cssfiles){
@@ -87,12 +87,14 @@ pageloadaction:function(pageurl){
 
 onpageload:function(pageurl){
  //do nothing by default
- //$("#window").center();
- ClearPost();
- pageHistory(pageurl);
-  whichPage(pageurl);
-  anchorScrollIt();
 
+ //$("#window").center();
+ // ClearPost();
+ pageHistory(pageurl);
+ HideMenuNow();
+ HideMenu();
+ whichPage(pageurl);
+ 
 },
 
 load:function(containerid, pageurl, bustcache, jsfiles, cssfiles){
