@@ -1,12 +1,12 @@
 <?
-//include ("/opt/lampp/htdocs/sessions.php");
-//include ("/opt/lampp/htdocs/globalconfig.php");
-//include("/opt/lampp/htdocs/sql.php");
+include ("/opt/lampp/htdocs/sessions.php");
+include ("/opt/lampp/htdocs/globalconfig.php");
+include ("/opt/lampp/htdocs/sql.php");
 //include("/opt/lampp/htdocs/function_stringprotect.php");
 
 
 if(!isset($_SESSION["u_u"])){
-//exit;
+exit;
 }
 
 

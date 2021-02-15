@@ -6,7 +6,7 @@ include("/opt/lampp/htdocs/sql.php");
 error_reporting(1);
 
 if(!isset($_SESSION["u_u"])){
-//exit;
+exit;
 }
 
 
