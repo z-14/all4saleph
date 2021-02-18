@@ -61,7 +61,8 @@ $email =$row["email"];
     
     include ('set_cookie.php');
 	echo "logging in..." ;
-	header("https://all4sale.ph/");
+	header("https://all4sale.ph/index.php");
+	echo "header";
 
     }else{
     	echo 'error occured: username and password did not match';
