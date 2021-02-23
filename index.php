@@ -14,7 +14,6 @@ if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) { // if request is not secu
     $url = 'https://' . $_SERVER['HTTP_HOST']
     . $_SERVER['REQUEST_URI'];
     header('Location: ' . $url);
-    exit;
 } 
 ?>
 
